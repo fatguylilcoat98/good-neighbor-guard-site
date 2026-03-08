@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Good Neighbor Guard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Grandstander:wght@700;800&display=swap" rel="stylesheet" />
 
   <style>
     * { box-sizing: border-box; }
@@ -22,6 +22,8 @@
       --danger:#ff4444;
       --good:#22c55e;
       --shadow:0 12px 30px rgba(0,0,0,.35);
+      --blue:#0c9bee;
+      --blue-glow:rgba(12,155,238,.3);
     }
 
     html { scroll-behavior:smooth; }
@@ -389,54 +391,332 @@
       letter-spacing:.02em;
     }
 
+    /* ═══════════════════════════════════════
+       NYMBLELOGIC SECTION — full upgrade
+    ═══════════════════════════════════════ */
     .nym-section{
-      text-align:center;
       margin-top:120px;
+      padding:0;
     }
 
-    .nym-section p{
-      color:var(--muted);
-      line-height:1.7;
-      max-width:700px;
-      margin:14px auto 0;
-    }
-
-    .nym-box{
+    /* outer shell — matches .card style but wider */
+    .nym-shell{
+      background:linear-gradient(160deg, rgba(12,155,238,.07) 0%, rgba(255,255,255,.02) 60%);
+      border:1px solid rgba(12,155,238,.2);
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:0 0 60px rgba(12,155,238,.06), var(--shadow);
       position:relative;
-      display:inline-block;
-      margin-top:28px;
-      font-size:28px;
-      font-weight:700;
     }
 
-    .nym-text{
-      background:#15161c;
-      border:1px solid var(--line);
-      padding:14px 26px;
-      border-radius:14px;
-      box-shadow:var(--shadow);
-      display:inline-block;
-    }
-
-    .nym-rabbit{
+    /* top accent line */
+    .nym-shell::before{
+      content:'';
       position:absolute;
-      right:-44px;
-      top:-10px;
-      font-size:36px;
-      animation:nymPeek 6s infinite;
-      filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));
+      top:0; left:60px; right:60px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(12,155,238,.5), transparent);
     }
 
-    @keyframes nymPeek{
-      0%   { transform:translateX(40px); opacity:0; }
-      18%  { transform:translateX(0); opacity:1; }
-      35%  { transform:translateX(0) rotate(-10deg); }
-      48%  { transform:translateX(0) rotate(10deg); }
-      58%  { transform:translateX(0); opacity:1; }
-      80%  { transform:translateX(40px); opacity:0; }
-      100% { transform:translateX(40px); opacity:0; }
+    .nym-inner{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:0;
+      align-items:center;
     }
 
+    /* ── LEFT: copy ── */
+    .nym-copy{
+      padding:56px 52px 56px 52px;
+    }
+
+    .nym-eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:6px 13px;
+      border-radius:999px;
+      background:rgba(12,155,238,.12);
+      border:1px solid rgba(12,155,238,.25);
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--blue);
+      margin-bottom:20px;
+    }
+    .nym-eyebrow__dot{
+      width:6px; height:6px;
+      border-radius:50%;
+      background:var(--blue);
+      animation:pulse-dot 2s ease-in-out infinite;
+    }
+
+    .nym-copy h2{
+      margin:0 0 6px;
+      font-size:clamp(30px, 3.5vw, 44px);
+      letter-spacing:-0.03em;
+      font-weight:800;
+      line-height:1.05;
+    }
+
+    .nym-copy h2 .accent{
+      background:linear-gradient(135deg, #0c9bee, #5dc8f5);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+
+    .nym-tagline{
+      font-family:'Grandstander', cursive;
+      font-weight:700;
+      font-size:15px;
+      color:rgba(12,155,238,.8);
+      letter-spacing:.02em;
+      margin-bottom:20px;
+    }
+
+    .nym-desc{
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.75;
+      margin-bottom:28px;
+      max-width:440px;
+    }
+
+    /* feature pill list */
+    .nym-features{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:34px;
+    }
+
+    .nym-feat{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:14px;
+      color:var(--muted);
+      font-weight:500;
+    }
+
+    .nym-feat__icon{
+      width:28px; height:28px;
+      border-radius:8px;
+      background:rgba(12,155,238,.12);
+      border:1px solid rgba(12,155,238,.2);
+      display:flex; align-items:center; justify-content:center;
+      font-size:13px;
+      flex-shrink:0;
+    }
+
+    /* Nymble Jr. badge + peek container */
+    .nym-badge-row{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    /* The peek wrapper: clips Nym sliding behind the badge */
+    .nym-peek-wrap{
+      position:relative;
+      display:inline-flex;
+      flex-direction:column;
+      align-items:center;
+      /* tall enough for Nym to slide up into */
+      padding-top:72px;
+    }
+
+    .nym-peek-img{
+      position:absolute;
+      bottom:100%;
+      left:50%;
+      transform:translateX(-50%) translateY(100%);
+      width:78px;
+      height:78px;
+      object-fit:contain;
+      z-index:1;
+      pointer-events:none;
+      filter:drop-shadow(0 6px 18px rgba(12,155,238,.35));
+      animation:nym-peek-loop 6s ease-in-out infinite;
+    }
+
+    @keyframes nym-peek-loop{
+      0%   { transform:translateX(-50%) translateY(100%); }
+      14%  { transform:translateX(-50%) translateY(8%);   }
+      20%  { transform:translateX(-50%) translateY(5%);   }
+      60%  { transform:translateX(-50%) translateY(5%);   }
+      66%  { transform:translateX(-50%) translateY(0%);   }
+      72%  { transform:translateX(-50%) translateY(8%);   }
+      78%  { transform:translateX(-50%) translateY(0%);   }
+      88%  { transform:translateX(-50%) translateY(8%);   }
+      100% { transform:translateX(-50%) translateY(100%); }
+    }
+
+    .nym-jr-badge{
+      position:relative;
+      z-index:2;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 16px 8px 11px;
+      background:rgba(12,155,238,.1);
+      border:1.5px solid rgba(12,155,238,.3);
+      border-radius:999px;
+      box-shadow:0 4px 20px rgba(0,0,0,.3);
+      white-space:nowrap;
+    }
+
+    .nym-jr-badge__dot{
+      width:7px; height:7px;
+      border-radius:50%;
+      background:var(--blue);
+      box-shadow:0 0 6px rgba(12,155,238,.7);
+      animation:pulse-dot 2.5s ease-in-out infinite;
+    }
+
+    .nym-jr-badge__text{
+      font-family:'Grandstander', cursive;
+      font-weight:800;
+      font-size:15px;
+      color:#fff;
+    }
+    .nym-jr-badge__text em{
+      color:var(--blue);
+      font-style:normal;
+    }
+
+    .coming-soon-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.1);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:var(--faint);
+    }
+
+    /* ── RIGHT: Nym hero visual ── */
+    .nym-visual{
+      padding:48px 40px 48px 20px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    /* glow rings behind main image */
+    .nym-visual__rings{
+      position:relative;
+      width:300px;
+      height:300px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .nym-ring{
+      position:absolute;
+      border-radius:50%;
+      border:1px solid rgba(12,155,238,.12);
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      animation:ring-pulse 3.5s ease-in-out infinite;
+    }
+    .nym-ring:nth-child(1){ width:200px; height:200px; animation-delay:0s; }
+    .nym-ring:nth-child(2){ width:260px; height:260px; animation-delay:.6s; border-color:rgba(12,155,238,.07); }
+    .nym-ring:nth-child(3){ width:310px; height:310px; animation-delay:1.2s; border-color:rgba(12,155,238,.04); }
+
+    .nym-glow-blob{
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:180px; height:180px;
+      background:radial-gradient(circle, rgba(12,155,238,.16) 0%, transparent 70%);
+      border-radius:50%;
+      filter:blur(18px);
+      animation:glow-breathe 3.5s ease-in-out infinite;
+    }
+
+    .nym-hero-img{
+      position:relative;
+      z-index:2;
+      width:240px;
+      height:auto;
+      filter:drop-shadow(0 16px 48px rgba(12,155,238,.28)) drop-shadow(0 4px 16px rgba(0,0,0,.5));
+      animation:nym-float 4s ease-in-out infinite;
+    }
+
+    /* floating code chips */
+    .nym-chip{
+      position:absolute;
+      padding:5px 11px;
+      background:rgba(12,155,238,.1);
+      border:1px solid rgba(12,155,238,.22);
+      border-radius:8px;
+      font-size:11px;
+      font-weight:600;
+      color:rgba(12,155,238,.9);
+      white-space:nowrap;
+      backdrop-filter:blur(6px);
+      animation:chip-float 5s ease-in-out infinite;
+      z-index:3;
+    }
+    .nym-chip-1{ top:14%; right:2%;  animation-delay:0s;   }
+    .nym-chip-2{ bottom:18%; right:0%; animation-delay:1.4s; }
+    .nym-chip-3{ top:52%; left:0%;  animation-delay:2.6s; color:rgba(160,210,245,.8); }
+
+    /* caption under the visual */
+    .nym-visual__caption{
+      margin-top:20px;
+      text-align:center;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(12,155,238,.5);
+    }
+
+    /* divider inside the shell */
+    .nym-divider{
+      width:1px;
+      align-self:stretch;
+      background:linear-gradient(180deg, transparent, rgba(12,155,238,.15) 30%, rgba(12,155,238,.15) 70%, transparent);
+    }
+
+    /* ── KEYFRAMES shared ── */
+    @keyframes pulse-dot{
+      0%,100%{ box-shadow:0 0 5px rgba(12,155,238,.6); opacity:1; }
+      50%    { box-shadow:0 0 12px rgba(12,155,238,1);  opacity:.8; }
+    }
+    @keyframes ring-pulse{
+      0%,100%{ opacity:.6; }
+      50%    { opacity:1; }
+    }
+    @keyframes glow-breathe{
+      0%,100%{ transform:translate(-50%,-50%) scale(1);   opacity:.8; }
+      50%    { transform:translate(-50%,-50%) scale(1.15); opacity:1; }
+    }
+    @keyframes nym-float{
+      0%,100%{ transform:translateY(0); }
+      50%    { transform:translateY(-10px); }
+    }
+    @keyframes chip-float{
+      0%,100%{ transform:translateY(0);   opacity:.85; }
+      50%    { transform:translateY(-6px); opacity:1;   }
+    }
+
+    /* ═══════════════════════════════════════
+       REST OF EXISTING STYLES (unchanged)
+    ═══════════════════════════════════════ */
     .mission{
       max-width:760px;
       margin:28px auto 0;
@@ -496,36 +776,23 @@
         min-height:86vh;
         background-size:cover;
       }
+      .hero-box{ padding:30px 22px; }
+      .hero h1{ font-size:36px; }
+      header{ position:static; }
+      .header-inner{ flex-direction:column; align-items:flex-start; }
+      nav{ gap:12px; }
+      .section-title{ margin-top:90px; }
+      .demo-top{ align-items:flex-start; text-align:left; }
 
-      .hero-box{
-        padding:30px 22px;
+      /* NymbleLogic mobile */
+      .nym-inner{
+        grid-template-columns:1fr;
       }
-
-      .hero h1{
-        font-size:36px;
-      }
-
-      header{
-        position:static;
-      }
-
-      .header-inner{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      nav{
-        gap:12px;
-      }
-
-      .section-title{
-        margin-top:90px;
-      }
-
-      .demo-top{
-        align-items:flex-start;
-        text-align:left;
-      }
+      .nym-divider{ display:none; }
+      .nym-copy{ padding:40px 28px 28px; }
+      .nym-visual{ padding:10px 28px 40px; }
+      .nym-hero-img{ width:180px; }
+      .nym-chip{ display:none; }
     }
   </style>
 </head>
@@ -544,6 +811,7 @@
       <nav>
         <a href="#products">Products</a>
         <a href="#demo">Try Veracore</a>
+        <a href="#nymblelogic">NymbleLogic</a>
         <a href="#mission">Mission</a>
         <a href="#youtube">YouTube</a>
       </nav>
@@ -553,14 +821,11 @@
   <section class="hero">
     <div class="hero-box reveal">
       <div class="eyebrow">Truth • Safety • Collaboration</div>
-
       <h1>Human Intelligence<br>Working With AI</h1>
-
       <p>
         Building AI systems that help people verify information, defend against scams,
         and build software with collaborative intelligence.
       </p>
-
       <div class="hero-actions">
         <a class="button button-primary" href="https://veracore.onrender.com">Launch Veracore</a>
         <a class="button button-secondary" href="#products">Explore Products</a>
@@ -624,17 +889,14 @@
             />
             <button class="button button-primary" onclick="runDemo()">Verify</button>
           </div>
-
           <div class="demo-meta">
             Demo queries should be short. This box uses your Veracore backend and should be protected by backend rate limits.
           </div>
-
           <div class="demo-badges">
             <div class="badge">Max 120 characters</div>
             <div class="badge">Lightweight demo mode</div>
             <div class="badge">Powered by Veracore</div>
           </div>
-
           <div class="demo-result" id="demoResult">
             Enter a claim above and press Verify.
           </div>
@@ -642,20 +904,98 @@
       </div>
     </section>
 
-    <section class="nym-section reveal">
-      <h2 class="section-title" style="margin-top:0;">NymbleLogic</h2>
-      <p>
-        Build apps and games in seconds with a collaborative AI development team.
-        Designed for creators, builders, and kids learning programming.
-      </p>
+    <!-- ═══════════════════════════════════
+         NYMBLELOGIC — UPGRADED SECTION
+    ═══════════════════════════════════ -->
+    <section class="nym-section reveal" id="nymblelogic">
+      <h2 class="section-title" style="margin-top:0; margin-bottom:36px;">NymbleLogic</h2>
 
-      <div class="nym-box">
-        <span class="nym-text">Nym Jr.</span>
-        <div class="nym-rabbit">🐇</div>
+      <div class="nym-shell">
+        <div class="nym-inner">
+
+          <!-- LEFT: copy + badge -->
+          <div class="nym-copy">
+            <div class="nym-eyebrow">
+              <span class="nym-eyebrow__dot"></span>
+              Coming Soon
+            </div>
+
+            <h2>Build an App<br><span class="accent">in a Snap.</span></h2>
+            <p class="nym-tagline">Powered by Nymble Jr.</p>
+
+            <p class="nym-desc">
+              A collaborative AI development team that designs, builds, and ships
+              apps and games in seconds. Built for creators, indie builders, and
+              kids learning to code — all under one roof.
+            </p>
+
+            <div class="nym-features">
+              <div class="nym-feat">
+                <span class="nym-feat__icon">⚡</span>
+                Describe your idea — Nymble Jr. builds it instantly
+              </div>
+              <div class="nym-feat">
+                <span class="nym-feat__icon">🤝</span>
+                Multi-model AI team: design, build, test, verify
+              </div>
+              <div class="nym-feat">
+                <span class="nym-feat__icon">✅</span>
+                Every output verified by Veracore before delivery
+              </div>
+              <div class="nym-feat">
+                <span class="nym-feat__icon">🧒</span>
+                Kid-friendly, creator-ready, no coding required
+              </div>
+            </div>
+
+            <div class="nym-badge-row">
+              <!-- Nymble Jr. pill with Nym peeking out from behind it -->
+              <div class="nym-peek-wrap">
+                <img
+                  class="nym-peek-img"
+                  src="nym_cheer.svg"
+                  alt="Nym the rabbit peeking"
+                />
+                <div class="nym-jr-badge">
+                  <span class="nym-jr-badge__dot"></span>
+                  <span class="nym-jr-badge__text">Nymble <em>Jr.</em></span>
+                </div>
+              </div>
+
+              <div class="coming-soon-pill">
+                🚀 &nbsp;Launching Soon
+              </div>
+            </div>
+          </div>
+
+          <div class="nym-divider"></div>
+
+          <!-- RIGHT: Nym hero visual -->
+          <div class="nym-visual">
+            <div class="nym-visual__rings">
+              <div class="nym-ring"></div>
+              <div class="nym-ring"></div>
+              <div class="nym-ring"></div>
+              <div class="nym-glow-blob"></div>
+              <img
+                class="nym-hero-img"
+                src="nym_cheer.svg"
+                alt="Nym the rabbit mascot"
+              />
+            </div>
+
+            <!-- floating code chips -->
+            <div class="nym-chip nym-chip-1">build("my app")</div>
+            <div class="nym-chip nym-chip-2">verified ✓</div>
+            <div class="nym-chip nym-chip-3">snap → ship</div>
+
+            <p class="nym-visual__caption">Nymble Jr. · Your AI Build Partner</p>
+          </div>
+
+        </div>
       </div>
-
-      <p style="opacity:.72; margin-top:20px;"><strong>Coming Soon</strong></p>
     </section>
+    <!-- end NymbleLogic -->
 
     <h2 class="section-title reveal" id="mission">Our Mission</h2>
     <p class="mission reveal">
@@ -666,9 +1006,7 @@
 
     <div class="youtube reveal" id="youtube">
       <h2 class="section-title" style="margin-top:0;">Follow the Journey</h2>
-      <p>
-        Watch the development of Veracore, NymbleLogic, Lylo, and the House of AI.
-      </p>
+      <p>Watch the development of Veracore, NymbleLogic, Lylo, and the House of AI.</p>
       <a href="https://www.youtube.com/@TheGoodNeighborGuard" target="_blank" rel="noopener noreferrer">
         Visit the YouTube Channel →
       </a>
@@ -704,20 +1042,16 @@
 
     function drawParticles(){
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       particles.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
-
         if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
         if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
         ctx.beginPath();
         ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
         ctx.fillStyle = "rgba(120,120,255,.72)";
         ctx.fill();
       });
-
       requestAnimationFrame(drawParticles);
     }
     drawParticles();
@@ -726,54 +1060,38 @@
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add("visible");
-        }
+        if(entry.isIntersecting) entry.target.classList.add("visible");
       });
     }, { threshold: 0.12 });
-
     reveals.forEach(el => observer.observe(el));
 
     // DEMO BOX
     async function runDemo(){
       const input = document.getElementById("demoInput").value.trim();
       const resultBox = document.getElementById("demoResult");
-
       if(input.length < 5){
         resultBox.innerHTML = "Please enter a short claim or question to verify.";
         return;
       }
-
       resultBox.innerHTML = "Running verification...";
-
       try{
         const res = await fetch("https://veracore.onrender.com/api/demo", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ query: input })
         });
-
-        if(!res.ok){
-          throw new Error("Demo endpoint unavailable");
-        }
-
+        if(!res.ok) throw new Error("Demo endpoint unavailable");
         const data = await res.json();
-
         const answer = data.answer || "No answer returned.";
         const confidence = (data.confidence !== undefined && data.confidence !== null)
-          ? `${data.confidence}%`
-          : "N/A";
-
+          ? `${data.confidence}%` : "N/A";
         const sources = Array.isArray(data.sources) ? data.sources.length : 0;
-
         resultBox.innerHTML = `
           <strong>Answer:</strong> ${answer}<br><br>
           <strong>Confidence:</strong> ${confidence}<br>
           <strong>Sources:</strong> ${sources}
         `;
-      } catch (err){
+      } catch(err){
         resultBox.innerHTML = `
           Demo box is not live yet or the endpoint is unavailable.<br><br>
           <a href="https://veracore.onrender.com" style="color:#9dc0ff;text-decoration:none;font-weight:700;">
