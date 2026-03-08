@@ -16,13 +16,13 @@
 
 body{
 margin:0;
-font-family:Inter, sans-serif;
+font-family:Inter,sans-serif;
 background:#0b0c10;
 color:white;
 overflow-x:hidden;
 }
 
-/* AI PARTICLE BACKGROUND */
+/* PARTICLE BACKGROUND */
 
 canvas{
 position:fixed;
@@ -52,9 +52,9 @@ font-weight:700;
 }
 
 nav a{
-color:white;
-margin-left:22px;
+margin-left:20px;
 text-decoration:none;
+color:white;
 opacity:.8;
 font-size:14px;
 }
@@ -87,7 +87,7 @@ backdrop-filter:blur(8px);
 }
 
 .hero h1{
-font-size:50px;
+font-size:48px;
 margin:0;
 }
 
@@ -115,18 +115,18 @@ transform:translateY(-2px);
 box-shadow:0 8px 20px rgba(99,102,241,.4);
 }
 
-/* SECTIONS */
+/* SECTION TITLES */
 
 .section-title{
 text-align:center;
-margin-top:140px;
+margin-top:120px;
 font-size:36px;
 }
 
 /* PRODUCT GRID */
 
 .products{
-margin-top:60px;
+margin-top:50px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:30px;
@@ -146,7 +146,6 @@ box-shadow:0 12px 30px rgba(0,0,0,.5);
 
 .card h3{
 margin-top:0;
-font-size:22px;
 }
 
 .card p{
@@ -157,36 +156,58 @@ line-height:1.6;
 .card a{
 color:#8ab4ff;
 text-decoration:none;
-font-weight:500;
+}
+
+/* NYM SECTION */
+
+.nym-section{
+text-align:center;
+margin-top:120px;
+}
+
+.nym-box{
+position:relative;
+display:inline-block;
+margin-top:30px;
+font-size:28px;
+font-weight:600;
+}
+
+.nym-text{
+background:#15161c;
+padding:14px 26px;
+border-radius:10px;
+}
+
+.nym-rabbit{
+position:absolute;
+right:-40px;
+top:-10px;
+font-size:36px;
+animation:nymPeek 6s infinite;
+}
+
+@keyframes nymPeek{
+
+0%{transform:translateX(40px);opacity:0}
+20%{transform:translateX(0);opacity:1}
+40%{transform:translateX(0) rotate(-10deg)}
+50%{transform:translateX(0) rotate(10deg)}
+60%{transform:translateX(0)}
+80%{transform:translateX(40px);opacity:0}
+100%{transform:translateX(40px);opacity:0}
+
 }
 
 /* MISSION */
 
 .mission{
-max-width:720px;
+max-width:700px;
 margin:auto;
 margin-top:30px;
 text-align:center;
 opacity:.85;
 line-height:1.7;
-}
-
-/* DEMO SECTION */
-
-.demo{
-text-align:center;
-margin-top:100px;
-}
-
-.demo-box{
-background:#15161c;
-padding:40px;
-border-radius:16px;
-display:inline-block;
-}
-
-.demo-box h3{
-margin-top:0;
 }
 
 /* YOUTUBE */
@@ -200,10 +221,6 @@ margin-top:120px;
 color:#ff4444;
 font-size:18px;
 text-decoration:none;
-}
-
-.youtube a:hover{
-opacity:.8;
 }
 
 /* FOOTER */
@@ -259,7 +276,6 @@ The Good Neighbor Guard
 
 </div>
 
-
 <section class="hero">
 
 <div class="hero-box">
@@ -283,14 +299,9 @@ Launch Veracore
 </section>
 
 
-
 <div class="container">
 
-<h2 class="section-title" id="products">
-
-Products
-
-</h2>
+<h2 class="section-title" id="products">Products</h2>
 
 <div class="products">
 
@@ -300,14 +311,12 @@ Products
 
 <p>
 
-A multi-model verification engine that checks AI answers using adversarial reasoning, independent models, and deterministic computation.
+A multi-model AI verification engine that checks answers using independent models, adversarial reasoning, and deterministic computation.
 
 </p>
 
 <a href="https://veracore.onrender.com">
-
 Open Veracore →
-
 </a>
 
 </div>
@@ -315,15 +324,15 @@ Open Veracore →
 
 <div class="card">
 
-<h3>NymbleLogic</h3>
+<h3>Lylo</h3>
 
 <p>
 
-Build apps and games instantly with a collaborative AI development team. Designed for developers and kids learning programming.
+A scam defense and digital safety system designed to protect people from fraud, phishing, and manipulation.
 
 </p>
 
-<p><strong>Coming Soon</strong></p>
+<p><strong>In Development</strong></p>
 
 </div>
 
@@ -345,36 +354,30 @@ A collaborative AI system where multiple AI models work together to design, buil
 </div>
 
 
+<section class="nym-section">
 
-<div class="demo">
-
-<div class="demo-box">
-
-<h3>Try Veracore</h3>
+<h2>NymbleLogic</h2>
 
 <p>
 
-See the verification engine in action.
+Build apps and games in seconds with a collaborative AI development team.
 
 </p>
 
-<a class="button" href="https://veracore.onrender.com">
+<div class="nym-box">
 
-Run a Verification
+<span class="nym-text">Nym Jr.</span>
 
-</a>
-
-</div>
+<div class="nym-rabbit">🐇</div>
 
 </div>
 
+<p style="opacity:.7;margin-top:20px;">Coming Soon</p>
+
+</section>
 
 
-<h2 class="section-title" id="mission">
-
-Our Mission
-
-</h2>
+<h2 class="section-title" id="mission">Our Mission</h2>
 
 <p class="mission">
 
@@ -385,31 +388,25 @@ The Good Neighbor Guard builds systems that combine human judgment with multiple
 </p>
 
 
-
 <div class="youtube" id="youtube">
 
-<h2 class="section-title">
-
-Follow the Journey
-
-</h2>
+<h2 class="section-title">Follow the Journey</h2>
 
 <p>
 
-Watch the development of Veracore, NymbleLogic, and the House of AI.
+Watch the development of Veracore, NymbleLogic, Lylo, and the House of AI.
 
 </p>
 
 <br>
 
-<a href="PUT_YOUTUBE_LINK_HERE">
+<a href="https://www.youtube.com/@TheGoodNeighborGuard">
 
 Visit the YouTube Channel →
 
 </a>
 
 </div>
-
 
 
 <footer>
@@ -424,7 +421,7 @@ The Good Neighbor Guard
 
 <script>
 
-/* AI PARTICLE BACKGROUND */
+/* PARTICLE BACKGROUND */
 
 const canvas=document.getElementById("particles")
 const ctx=canvas.getContext("2d")
