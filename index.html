@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -7,94 +8,154 @@
 
 <title>The Good Neighbor Guard</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
 font-family:Inter, sans-serif;
-background:#0f1117;
+background:#0b0c10;
 color:white;
 }
 
+.container{
+max-width:1200px;
+margin:auto;
+padding:0 20px;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:24px 0;
+}
+
+.logo{
+font-weight:700;
+font-size:22px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+opacity:.8;
+font-size:14px;
+}
+
+nav a:hover{
+opacity:1;
+}
+
 .hero{
-position:relative;
-height:100vh;
-background:url("handshake.jpg") center/cover no-repeat;
+height:85vh;
+background-image:url("handshake.jpg");
+background-size:contain;
+background-repeat:no-repeat;
+background-position:center;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
+padding:20px;
 }
 
-.hero::after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(
-rgba(0,0,0,.6),
-rgba(0,0,0,.8)
-);
-}
-
-.hero-content{
-position:relative;
-z-index:2;
-max-width:800px;
+.hero-box{
+background:rgba(0,0,0,.6);
 padding:40px;
+border-radius:16px;
+max-width:700px;
 }
 
 .hero h1{
-font-size:52px;
-margin-bottom:20px;
-font-weight:800;
+font-size:48px;
+margin:0;
 }
 
 .hero p{
-font-size:20px;
-color:#d0d0d0;
-margin-bottom:30px;
+margin-top:20px;
+font-size:18px;
+opacity:.85;
 }
 
-.btn{
+.button{
 display:inline-block;
-padding:16px 32px;
-background:#6d5efc;
-color:white;
+margin-top:30px;
+background:#6366f1;
+padding:14px 28px;
 border-radius:8px;
 text-decoration:none;
-font-weight:700;
-}
-
-.section{
-padding:80px 20px;
-max-width:1100px;
-margin:auto;
+color:white;
+font-weight:600;
 }
 
 .products{
+margin-top:120px;
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
 }
 
 .card{
-background:#151822;
+background:#15161c;
 padding:30px;
-border-radius:12px;
-border:1px solid #222;
+border-radius:14px;
 }
 
-.card h2{
+.card h3{
 margin-top:0;
+font-size:22px;
+}
+
+.card p{
+opacity:.75;
+line-height:1.6;
+}
+
+.card a{
+color:#8ab4ff;
+text-decoration:none;
+font-weight:500;
+}
+
+.section-title{
+text-align:center;
+margin-top:140px;
+font-size:34px;
+}
+
+.mission{
+max-width:700px;
+margin:auto;
+text-align:center;
+margin-top:30px;
+opacity:.85;
+line-height:1.7;
+}
+
+.youtube{
+text-align:center;
+margin-top:120px;
+}
+
+.youtube a{
+color:#ff4444;
+font-size:18px;
+text-decoration:none;
 }
 
 footer{
+margin-top:140px;
 text-align:center;
-padding:40px;
-color:#777;
-border-top:1px solid #222;
+padding:40px 0;
+font-size:14px;
+opacity:.6;
 }
 
 @media(max-width:800px){
@@ -103,31 +164,51 @@ border-top:1px solid #222;
 font-size:36px;
 }
 
-.products{
-grid-template-columns:1fr;
-}
-
 }
 
 </style>
 
 </head>
 
+
 <body>
+
+<div class="container">
+
+<header>
+
+<div class="logo">
+The Good Neighbor Guard
+</div>
+
+<nav>
+
+<a href="#products">Products</a>
+<a href="#mission">Mission</a>
+<a href="#youtube">YouTube</a>
+
+</nav>
+
+</header>
+
+</div>
+
 
 <section class="hero">
 
-<div class="hero-content">
+<div class="hero-box">
 
-<h1>The Good Neighbor Guard</h1>
+<h1>
+Human Intelligence<br>Working With AI
+</h1>
 
 <p>
-Building tools where humans and artificial intelligence
-work together to verify truth, create software,
-and protect people from misinformation.
+
+The Good Neighbor Guard builds AI systems designed to protect people from misinformation, scams, and unreliable answers while helping developers build powerful software with collaborative AI.
+
 </p>
 
-<a class="btn" href="https://veracore.onrender.com">
+<a class="button" href="https://veracore.onrender.com">
 Launch Veracore
 </a>
 
@@ -136,23 +217,27 @@ Launch Veracore
 </section>
 
 
-<section class="section">
 
-<h1 style="text-align:center;margin-bottom:60px;">Products</h1>
+<div class="container">
+
+<h2 class="section-title" id="products">
+Products
+</h2>
 
 <div class="products">
 
 <div class="card">
 
-<h2>Veracore</h2>
+<h3>Veracore</h3>
 
 <p>
-A multi-AI verification engine designed to expose hallucinations,
-cross-check claims, and verify information using independent models.
+
+A multi-model verification engine designed to check AI answers using independent models, adversarial reasoning, and deterministic computation.
+
 </p>
 
-<a class="btn" href="https://veracore.onrender.com">
-Try Veracore
+<a href="https://veracore.onrender.com">
+Open Veracore →
 </a>
 
 </div>
@@ -160,47 +245,97 @@ Try Veracore
 
 <div class="card">
 
-<h2>NymbleLogic</h2>
+<h3>NymbleLogic</h3>
 
 <p>
-Build an app in a snap.
+
+Build apps and games in seconds with the help of a collaborative AI team. Designed for both developers and kids learning programming.
+
 </p>
 
 <p>
-An AI-powered app builder that turns ideas into real playable apps.
-Includes <strong>Nym Jr.</strong> — a kid-friendly guide that helps
-young creators learn how software works.
+
+<strong>Coming Soon</strong>
+
 </p>
 
-<p style="color:#888">
-Coming Soon
+</div>
+
+
+<div class="card">
+
+<h3>House of AI</h3>
+
+<p>
+
+The collaborative AI system powering our products. Multiple AI systems working together to design, build, test, and verify software.
+
+</p>
+
+<p>
+
+<strong>Powered by House of AI</strong>
+
 </p>
 
 </div>
 
 </div>
 
-</section>
 
 
-<section class="section" style="text-align:center">
+<h2 class="section-title" id="mission">
 
-<h1>Powered by House of AI</h1>
+Our Mission
 
-<p style="color:#aaa;max-width:600px;margin:auto">
-The systems behind our tools are built using collaborative AI models
-working together to research, verify, and create solutions.
+</h2>
+
+<p class="mission">
+
+We believe the future isn't humans versus AI — it's humans and AI working together.
+
+The Good Neighbor Guard builds systems that combine human judgment with multiple AI systems to create safer, more reliable technology.
+
 </p>
 
-</section>
+
+
+<div class="youtube" id="youtube">
+
+<h2 class="section-title">
+
+Follow the Journey
+
+</h2>
+
+<p>
+
+Watch the development of Veracore, NymbleLogic, and the House of AI in real time.
+
+</p>
+
+<br>
+
+<a href="PUT_YOUR_YOUTUBE_LINK_HERE">
+
+Visit the YouTube Channel →
+
+</a>
+
+</div>
+
 
 
 <footer>
 
 © 2026 Christopher Hughes  
-The Good Neighbor Guard™
+The Good Neighbor Guard
 
 </footer>
 
+</div>
+
+
 </body>
+
 </html>
