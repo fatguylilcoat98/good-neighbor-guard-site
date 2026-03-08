@@ -12,16 +12,26 @@
 
 <style>
 
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
 font-family:Inter, sans-serif;
 background:#0b0c10;
 color:white;
+overflow-x:hidden;
 }
+
+/* AI PARTICLE BACKGROUND */
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+/* LAYOUT */
 
 .container{
 max-width:1200px;
@@ -37,14 +47,14 @@ padding:24px 0;
 }
 
 .logo{
-font-weight:700;
 font-size:22px;
+font-weight:700;
 }
 
 nav a{
 color:white;
+margin-left:22px;
 text-decoration:none;
-margin-left:20px;
 opacity:.8;
 font-size:14px;
 }
@@ -53,8 +63,10 @@ nav a:hover{
 opacity:1;
 }
 
+/* HERO */
+
 .hero{
-height:85vh;
+height:90vh;
 background-image:url("handshake.jpg");
 background-size:contain;
 background-repeat:no-repeat;
@@ -67,36 +79,54 @@ padding:20px;
 }
 
 .hero-box{
-background:rgba(0,0,0,.6);
+background:rgba(0,0,0,.65);
 padding:40px;
-border-radius:16px;
-max-width:700px;
+border-radius:18px;
+max-width:720px;
+backdrop-filter:blur(8px);
 }
 
 .hero h1{
-font-size:48px;
+font-size:50px;
 margin:0;
 }
 
 .hero p{
 margin-top:20px;
 font-size:18px;
-opacity:.85;
+opacity:.9;
+line-height:1.6;
 }
 
 .button{
 display:inline-block;
 margin-top:30px;
+padding:14px 30px;
 background:#6366f1;
-padding:14px 28px;
 border-radius:8px;
 text-decoration:none;
 color:white;
 font-weight:600;
+transition:.3s;
 }
 
+.button:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 20px rgba(99,102,241,.4);
+}
+
+/* SECTIONS */
+
+.section-title{
+text-align:center;
+margin-top:140px;
+font-size:36px;
+}
+
+/* PRODUCT GRID */
+
 .products{
-margin-top:120px;
+margin-top:60px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:30px;
@@ -105,7 +135,13 @@ gap:30px;
 .card{
 background:#15161c;
 padding:30px;
-border-radius:14px;
+border-radius:16px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 12px 30px rgba(0,0,0,.5);
 }
 
 .card h3{
@@ -124,20 +160,36 @@ text-decoration:none;
 font-weight:500;
 }
 
-.section-title{
-text-align:center;
-margin-top:140px;
-font-size:34px;
-}
+/* MISSION */
 
 .mission{
-max-width:700px;
+max-width:720px;
 margin:auto;
-text-align:center;
 margin-top:30px;
+text-align:center;
 opacity:.85;
 line-height:1.7;
 }
+
+/* DEMO SECTION */
+
+.demo{
+text-align:center;
+margin-top:100px;
+}
+
+.demo-box{
+background:#15161c;
+padding:40px;
+border-radius:16px;
+display:inline-block;
+}
+
+.demo-box h3{
+margin-top:0;
+}
+
+/* YOUTUBE */
 
 .youtube{
 text-align:center;
@@ -150,6 +202,12 @@ font-size:18px;
 text-decoration:none;
 }
 
+.youtube a:hover{
+opacity:.8;
+}
+
+/* FOOTER */
+
 footer{
 margin-top:140px;
 text-align:center;
@@ -158,10 +216,16 @@ font-size:14px;
 opacity:.6;
 }
 
+/* MOBILE */
+
 @media(max-width:800px){
 
 .hero h1{
 font-size:36px;
+}
+
+.hero{
+background-size:cover;
 }
 
 }
@@ -172,6 +236,8 @@ font-size:36px;
 
 
 <body>
+
+<canvas id="particles"></canvas>
 
 <div class="container">
 
@@ -204,7 +270,7 @@ Human Intelligence<br>Working With AI
 
 <p>
 
-The Good Neighbor Guard builds AI systems designed to protect people from misinformation, scams, and unreliable answers while helping developers build powerful software with collaborative AI.
+Building AI systems that help people verify information, defend against scams, and build software with collaborative intelligence.
 
 </p>
 
@@ -221,7 +287,9 @@ Launch Veracore
 <div class="container">
 
 <h2 class="section-title" id="products">
+
 Products
+
 </h2>
 
 <div class="products">
@@ -232,12 +300,14 @@ Products
 
 <p>
 
-A multi-model verification engine designed to check AI answers using independent models, adversarial reasoning, and deterministic computation.
+A multi-model verification engine that checks AI answers using adversarial reasoning, independent models, and deterministic computation.
 
 </p>
 
 <a href="https://veracore.onrender.com">
+
 Open Veracore →
+
 </a>
 
 </div>
@@ -249,15 +319,11 @@ Open Veracore →
 
 <p>
 
-Build apps and games in seconds with the help of a collaborative AI team. Designed for both developers and kids learning programming.
+Build apps and games instantly with a collaborative AI development team. Designed for developers and kids learning programming.
 
 </p>
 
-<p>
-
-<strong>Coming Soon</strong>
-
-</p>
+<p><strong>Coming Soon</strong></p>
 
 </div>
 
@@ -268,15 +334,35 @@ Build apps and games in seconds with the help of a collaborative AI team. Design
 
 <p>
 
-The collaborative AI system powering our products. Multiple AI systems working together to design, build, test, and verify software.
+A collaborative AI system where multiple AI models work together to design, build, test, and verify software.
 
 </p>
+
+<p><strong>Powered by House of AI</strong></p>
+
+</div>
+
+</div>
+
+
+
+<div class="demo">
+
+<div class="demo-box">
+
+<h3>Try Veracore</h3>
 
 <p>
 
-<strong>Powered by House of AI</strong>
+See the verification engine in action.
 
 </p>
+
+<a class="button" href="https://veracore.onrender.com">
+
+Run a Verification
+
+</a>
 
 </div>
 
@@ -310,13 +396,13 @@ Follow the Journey
 
 <p>
 
-Watch the development of Veracore, NymbleLogic, and the House of AI in real time.
+Watch the development of Veracore, NymbleLogic, and the House of AI.
 
 </p>
 
 <br>
 
-<a href="PUT_YOUR_YOUTUBE_LINK_HERE">
+<a href="PUT_YOUTUBE_LINK_HERE">
 
 Visit the YouTube Channel →
 
@@ -335,6 +421,58 @@ The Good Neighbor Guard
 
 </div>
 
+
+<script>
+
+/* AI PARTICLE BACKGROUND */
+
+const canvas=document.getElementById("particles")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let particles=[]
+
+for(let i=0;i<80;i++){
+
+particles.push({
+
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+vx:(Math.random()-.5)*.6,
+vy:(Math.random()-.5)*.6
+
+})
+
+}
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+particles.forEach(p=>{
+
+p.x+=p.vx
+p.y+=p.vy
+
+if(p.x<0||p.x>canvas.width)p.vx*=-1
+if(p.y<0||p.y>canvas.height)p.vy*=-1
+
+ctx.beginPath()
+ctx.arc(p.x,p.y,2,0,Math.PI*2)
+ctx.fillStyle="rgba(120,120,255,.7)"
+ctx.fill()
+
+})
+
+requestAnimationFrame(draw)
+
+}
+
+draw()
+
+</script>
 
 </body>
 
