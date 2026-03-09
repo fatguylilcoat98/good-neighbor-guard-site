@@ -483,6 +483,44 @@
       opacity:.9;
     }
 
+    /* \u2500\u2500 FEEDBACK SECTION \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
+    .feedback-section{
+      margin-top:120px;
+    }
+
+    .feedback-textarea{
+      width:100%;
+      min-height:130px;
+      margin-top:18px;
+      padding:16px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0b0d12;
+      color:#fff;
+      font-family:Inter, sans-serif;
+      font-size:15px;
+      line-height:1.7;
+      resize:vertical;
+      outline:none;
+      transition:.2s ease;
+    }
+
+    .feedback-textarea:focus{
+      border-color:rgba(99,102,241,.72);
+      box-shadow:0 0 0 4px rgba(99,102,241,.18);
+    }
+
+    .feedback-textarea::placeholder{
+      color:var(--faint);
+    }
+
+    .feedback-actions{
+      display:flex;
+      justify-content:flex-end;
+      margin-top:14px;
+    }
+    /* \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
+
     footer{
       margin-top:140px;
       text-align:center;
@@ -559,7 +597,7 @@
     <div class="container header-inner">
       <div class="logo-wrap">
         <div class="logo">The Good Neighbor Guard</div>
-        <div class="logo-sub">Truth • Safety • Collaboration</div>
+        <div class="logo-sub">Truth \u2022 Safety \u2022 Collaboration</div>
       </div>
 
       <nav>
@@ -644,7 +682,7 @@
       <div class="panel reveal">
         <h3>Why Veracore Exists</h3>
         <p>
-          Most AI tools sound confident even when they’re wrong. Veracore is built to challenge that.
+          Most AI tools sound confident even when they're wrong. Veracore is built to challenge that.
         </p>
 
         <div class="proof-list">
@@ -668,7 +706,7 @@
 
     <h2 class="section-title reveal" id="pillars">Three Pillars</h2>
     <p class="section-sub reveal">
-      Veracore doesn’t just answer questions. It validates them through a structured verification process.
+      Veracore doesn't just answer questions. It validates them through a structured verification process.
     </p>
 
     <div class="pillars">
@@ -706,17 +744,17 @@
     <div class="teaser-strip">
       <div class="teaser reveal">
         <strong>NymbleLogic</strong>
-        <span>Coming Soon • Build apps in a snap</span>
+        <span>Coming Soon \u2022 Build apps in a snap</span>
       </div>
 
       <div class="teaser reveal">
         <strong>Lylo</strong>
-        <span>In Development • Scam defense and digital safety</span>
+        <span>In Development \u2022 Scam defense and digital safety</span>
       </div>
 
       <div class="teaser reveal">
         <strong>House of AI</strong>
-        <span>Subtle by design • The system powering future collaboration</span>
+        <span>Subtle by design \u2022 The system powering future collaboration</span>
       </div>
     </div>
 
@@ -726,12 +764,32 @@
         Watch the build process, product evolution, and future launches on YouTube.
       </p>
       <a href="https://www.youtube.com/@TheGoodNeighborGuard" target="_blank" rel="noopener noreferrer">
-        Visit the YouTube Channel →
+        Visit the YouTube Channel \u2192
       </a>
     </div>
 
+    <!-- \u2500\u2500 FEEDBACK SECTION \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 -->
+    <div class="feedback-section reveal">
+      <div class="panel">
+        <h3>Help Improve Veracore</h3>
+        <p>
+          Veracore is still experimental. If something worked well, broke, or you just want to
+          leave a comment, send feedback.
+        </p>
+        <textarea
+          id="feedbackText"
+          class="feedback-textarea"
+          placeholder="What worked? What broke? Any thoughts at all \u2014 we read everything."
+        ></textarea>
+        <div class="feedback-actions">
+          <button class="button button-primary" onclick="sendFeedback()">Send Feedback</button>
+        </div>
+      </div>
+    </div>
+    <!-- \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 -->
+
     <footer>
-      © 2026 Christopher Hughes<br>
+      \u00a9 2026 Christopher Hughes<br>
       The Good Neighbor Guard
     </footer>
   </div>
@@ -833,11 +891,7 @@
         resultBox.innerHTML = `
           Demo box is not live yet or the endpoint is unavailable.<br><br>
           <a href="https://veracore.onrender.com" style="color:#9dc0ff;text-decoration:none;font-weight:700;">
-            Open the full Veracore app →
+            Open the full Veracore app \u2192
           </a>
         `;
       }
-    }
-  </script>
-</body>
-</html>
