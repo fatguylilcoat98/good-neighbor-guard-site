@@ -483,7 +483,7 @@
       opacity:.9;
     }
 
-    /* \u2500\u2500 FEEDBACK SECTION \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
+    /* ── FEEDBACK SECTION ──────────────────────────────────────────── */
     .feedback-section{
       margin-top:120px;
     }
@@ -519,7 +519,7 @@
       justify-content:flex-end;
       margin-top:14px;
     }
-    /* \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
+    /* ─────────────────────────────────────────────────────────────── */
 
     footer{
       margin-top:140px;
@@ -597,7 +597,7 @@
     <div class="container header-inner">
       <div class="logo-wrap">
         <div class="logo">The Good Neighbor Guard</div>
-        <div class="logo-sub">Truth \u2022 Safety \u2022 Collaboration</div>
+        <div class="logo-sub">Truth • Safety • Collaboration</div>
       </div>
 
       <nav>
@@ -744,17 +744,17 @@
     <div class="teaser-strip">
       <div class="teaser reveal">
         <strong>NymbleLogic</strong>
-        <span>Coming Soon \u2022 Build apps in a snap</span>
+        <span>Coming Soon • Build apps in a snap</span>
       </div>
 
       <div class="teaser reveal">
         <strong>Lylo</strong>
-        <span>In Development \u2022 Scam defense and digital safety</span>
+        <span>In Development • Scam defense and digital safety</span>
       </div>
 
       <div class="teaser reveal">
         <strong>House of AI</strong>
-        <span>Subtle by design \u2022 The system powering future collaboration</span>
+        <span>Subtle by design • The system powering future collaboration</span>
       </div>
     </div>
 
@@ -764,11 +764,11 @@
         Watch the build process, product evolution, and future launches on YouTube.
       </p>
       <a href="https://www.youtube.com/@TheGoodNeighborGuard" target="_blank" rel="noopener noreferrer">
-        Visit the YouTube Channel \u2192
+        Visit the YouTube Channel →
       </a>
     </div>
 
-    <!-- \u2500\u2500 FEEDBACK SECTION \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 -->
+    <!-- ── FEEDBACK SECTION ─────────────────────────────────────────────── -->
     <div class="feedback-section reveal">
       <div class="panel">
         <h3>Help Improve Veracore</h3>
@@ -779,17 +779,17 @@
         <textarea
           id="feedbackText"
           class="feedback-textarea"
-          placeholder="What worked? What broke? Any thoughts at all \u2014 we read everything."
+          placeholder="What worked? What broke? Any thoughts at all — we read everything."
         ></textarea>
         <div class="feedback-actions">
           <button class="button button-primary" onclick="sendFeedback()">Send Feedback</button>
         </div>
       </div>
     </div>
-    <!-- \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 -->
+    <!-- ──────────────────────────────────────────────────────────────────── -->
 
     <footer>
-      \u00a9 2026 Christopher Hughes<br>
+      © 2026 Christopher Hughes<br>
       The Good Neighbor Guard
     </footer>
   </div>
@@ -891,7 +891,24 @@
         resultBox.innerHTML = `
           Demo box is not live yet or the endpoint is unavailable.<br><br>
           <a href="https://veracore.onrender.com" style="color:#9dc0ff;text-decoration:none;font-weight:700;">
-            Open the full Veracore app \u2192
+            Open the full Veracore app →
           </a>
         `;
       }
+    }
+
+    // FEEDBACK
+    function sendFeedback(){
+      const text = document.getElementById("feedbackText").value.trim();
+      if(!text){
+        alert("Please write something before sending.");
+        return;
+      }
+      const subject = encodeURIComponent("Veracore Feedback");
+      const body    = encodeURIComponent(text);
+      window.location.href =
+        `mailto:thegoodneighborguard@gmail.com?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>
