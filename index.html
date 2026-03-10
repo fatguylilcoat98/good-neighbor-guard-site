@@ -738,4 +738,12 @@
       });
       result.innerHTML = `
         <div style="margin-top:14px;padding:18px;background:rgba(45,125,210,0.07);border:1px solid rgba(45,125,210,0.2);border-radius:14px;font-size:14px;">
-          Veracore is warming up. <a h
+          Veracore is warming up. <a href="https://veracore.onrender.com" style="color:var(--teal);" target="_blank">Open the full app →</a>
+        </div>`;
+    }
+  }
+
+  document.getElementById('q-input').addEventListener('keydown', e => { if(e.key==='Enter') runDemo(); });
+</script>
+</body>
+</html>
