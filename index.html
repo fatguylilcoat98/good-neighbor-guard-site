@@ -211,24 +211,7 @@
     .event-strip strong{color:var(--gold);}
 
     /* ── YOUTUBE ── */
-    .yt-section{padding:90px 24px;text-align:center;}
-    .yt-quote{
-      display:inline-block;font-size:13px;color:var(--gold);font-style:italic;
-      background:rgba(240,165,0,0.07);border:1px solid rgba(240,165,0,0.2);
-      border-radius:8px;padding:10px 20px;margin:20px 0 24px;
-    }
-    .yt-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
-    .yt-stat-num{font-family:'Orbitron',sans-serif;font-size:26px;font-weight:900;color:#fff;}
-    .yt-stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px;}
-    .yt-btn{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:15px 32px;background:rgba(255,60,60,0.08);
-      border:1.5px solid rgba(255,60,60,0.3);border-radius:8px;
-      color:#ff4444;font-family:'Orbitron',sans-serif;
-      font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-      text-decoration:none;transition:all .2s;
-    }
-    .yt-btn:hover{background:rgba(255,60,60,0.15);transform:translateY(-2px);}
+    .public-section{padding:90px 24px;text-align:center;}
 
     /* ── FOOTER ── */
     footer{padding:48px 24px;text-align:center;border-top:1px solid rgba(255,255,255,0.06);}
@@ -264,8 +247,8 @@
     <a href="#products">Products</a>
   </div>
   <div class="nav-right">
-    <a class="nav-signin" href="https://veracore.onrender.com/login" target="_blank">Sign In</a>
-    <a class="nav-open-btn" href="https://veracore.onrender.com/signup" target="_blank">Sign Up Free</a>
+    <a class="nav-signin" href="https://veracore.onrender.com/login" target="_blank" rel="noopener noreferrer">Sign In</a>
+    <a class="nav-open-btn" href="https://veracore.onrender.com/signup" target="_blank" rel="noopener noreferrer">Sign Up Free</a>
   </div>
 </nav>
 
@@ -276,16 +259,16 @@
   <div class="hero-content">
     <div class="live-badge">
       <div class="live-dot"></div>
-      Veracore is Live — Real Answers. Verified.
+      Veracore Beta is Live
     </div>
-    <h1>Need a <span class="gradient">real answer?</span><br>We've got your back.</h1>
+    <h1>When the answer matters,<br><span class="gradient">verify it.</span></h1>
     <p class="hero-sub">
-      Four AI systems check each other, verify the answer, and tell you exactly
-      how confident to be — in plain English anyone can understand.
+      Veracore uses multiple AI systems to check the claim, compare sources, challenge weak answers,
+      and show you how confident to be — in plain English.
     </p>
     <div class="hero-btns">
-      <a class="btn-primary" href="https://veracore.onrender.com/signup" target="_blank">Try Veracore Free</a>
-      <a class="btn-ghost" href="#for-who">See How It Works</a>
+      <a class="btn-primary" href="https://veracore.onrender.com/signup" target="_blank" rel="noopener noreferrer">Try Veracore Free</a>
+      <a class="btn-ghost" href="#for-who">How It Works</a>
     </div>
   </div>
 </section>
@@ -293,9 +276,8 @@
 <!-- MISSION -->
 <div class="mission">
   <p>
-    When family members got scammed, it became personal. When AI itself started giving false answers —
-    confidently, without hesitation — it became a mission.
-    <strong>People deserve better than a system that sounds certain and gets it wrong.
+    When family members got scammed, it became personal. When AI started giving false answers with confidence,
+    it became a mission. <strong>People deserve better than systems that sound certain and get it wrong.
     No noise. No half-truths. Just honest answers you can actually act on.</strong>
   </p>
 </div>
@@ -340,11 +322,11 @@
   <div class="wrap">
     <div style="background:var(--bg2);border:1px solid rgba(26,140,255,0.2);border-radius:20px;padding:52px 40px;max-width:680px;margin:0 auto;">
       <span class="eyebrow">Powered by Veracore™</span>
-      <h2 class="section-title" style="margin-bottom:12px;">Ask anything. Get a real answer.</h2>
+      <h2 class="section-title" style="margin-bottom:12px;">One question. Multiple systems. One verified answer.</h2>
       <p class="section-sub" style="margin:0 auto 32px;">Four AI systems research independently, cross-check each other, and surface a confidence-scored, source-verified answer. In plain language. Every time.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a class="btn-primary" href="https://veracore.onrender.com/signup" target="_blank">Create Free Account</a>
-        <a class="btn-ghost" href="https://veracore.onrender.com" target="_blank" style="font-size:11px;padding:15px 28px;">Open Veracore →</a>
+        <a class="btn-primary" href="https://veracore.onrender.com/signup" target="_blank" rel="noopener noreferrer">Create Free Account</a>
+        <a class="btn-ghost" href="https://veracore.onrender.com" target="_blank" rel="noopener noreferrer" style="font-size:11px;padding:15px 28px;">Open Veracore →</a>
       </div>
       <p style="font-size:12px;color:var(--faint);margin-top:18px;">3 free investigations · No credit card required</p>
     </div>
@@ -369,7 +351,7 @@
           <li>Standard pipeline</li>
           <li>No credit card needed</li>
         </ul>
-        <a href="https://veracore.onrender.com/signup" target="_blank" class="plan-btn ghost">Get Started</a>
+        <a href="https://veracore.onrender.com/signup" target="_blank" rel="noopener noreferrer" class="plan-btn ghost">Get Started</a>
       </div>
       <div class="plan-card reveal">
         <div class="plan-name">Explorer</div>
@@ -380,7 +362,7 @@
           <li>Web source verification</li>
           <li>Model transparency</li>
         </ul>
-        <a href="https://veracore.onrender.com/pricing" target="_blank" class="plan-btn">Subscribe</a>
+        <a href="https://veracore.onrender.com/pricing" target="_blank" rel="noopener noreferrer" class="plan-btn">Subscribe</a>
       </div>
       <div class="plan-card featured reveal">
         <div class="featured-badge">Most Popular</div>
@@ -393,7 +375,7 @@
           <li>Source verification</li>
           <li>Priority processing</li>
         </ul>
-        <a href="https://veracore.onrender.com/pricing" target="_blank" class="plan-btn">Subscribe</a>
+        <a href="https://veracore.onrender.com/pricing" target="_blank" rel="noopener noreferrer" class="plan-btn">Subscribe</a>
       </div>
       <div class="plan-card reveal">
         <div class="plan-name">Pro</div>
@@ -404,11 +386,11 @@
           <li>High volume capacity</li>
           <li>Power user access</li>
         </ul>
-        <a href="https://veracore.onrender.com/pricing" target="_blank" class="plan-btn">Subscribe</a>
+        <a href="https://veracore.onrender.com/pricing" target="_blank" rel="noopener noreferrer" class="plan-btn">Subscribe</a>
       </div>
     </div>
     <div style="text-align:center;margin-top:28px;">
-      <a href="https://veracore.onrender.com/pricing" target="_blank" style="font-size:13px;color:var(--teal);text-decoration:none;">View team &amp; enterprise plans →</a>
+      <a href="https://veracore.onrender.com/pricing" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--teal);text-decoration:none;">View team &amp; enterprise plans →</a>
     </div>
   </div>
 </section>
@@ -424,7 +406,7 @@
         <span class="prod-status s-live">● Live Now</span>
         <div class="prod-name">Veracore™</div>
         <div class="prod-desc">The truth verification engine. Ask anything — get a confidence-scored, source-verified answer from four AI systems that actively check each other. Includes adversarial review and The Closer escalation layer.</div>
-        <a class="prod-link" href="https://veracore.onrender.com" target="_blank">Launch Veracore →</a>
+        <a class="prod-link" href="https://veracore.onrender.com" target="_blank" rel="noopener noreferrer">Launch Veracore →</a>
       </div>
       <div class="prod-card reveal">
         <span class="prod-status s-soon">◐ In Development</span>
@@ -446,34 +428,24 @@
 <div class="event-strip">
   <p>
     <strong>📍 1 Million Cups Sacramento — April 1st, 2026</strong><br>
-    Veracore will be presented live to Sacramento's entrepreneurship community. Come see what honest AI looks like in action.
+    Veracore will be presented live to Sacramento's entrepreneurship community in a fully unscripted demo.
+    A live audience question goes in. The truth engine investigates in real time.
   </p>
 </div>
 
-<!-- YOUTUBE -->
-<section class="yt-section">
+<!-- BUILT IN PUBLIC -->
+<section class="public-section">
   <div class="wrap">
-    <span class="eyebrow reveal" style="display:block;">Follow the Build</span>
-    <h2 class="section-title reveal" style="text-align:center;">Watch it happen in real time.</h2>
-    <p style="font-size:15px;color:var(--muted);max-width:520px;margin:12px auto 0;line-height:1.7;" class="reveal">
-      One person. A Chromebook. Building tools to protect real people from real harm. No funding. No team. Just the mission.
+    <span class="eyebrow reveal" style="display:block;">Built in Public</span>
+    <h2 class="section-title reveal" style="text-align:center;">Built for real people, not just demos.</h2>
+    <p style="font-size:15px;color:var(--muted);max-width:580px;margin:16px auto 32px;line-height:1.75;text-align:center;" class="reveal">
+      Veracore was built to help people make better decisions when the answer actually matters —
+      health questions, scams, rumors, research, and everyday uncertainty.
+      This is not another chatbot. It is a truth verification engine.
     </p>
-    <div class="yt-quote reveal">⚡ "This Short kept viewers watching on loop" — YouTube</div>
-    <div class="yt-stats reveal">
-      <div class="yt-stat">
-        <div class="yt-stat-num">500+</div>
-        <div class="yt-stat-label">Views · Day One</div>
-      </div>
-      <div class="yt-stat">
-        <div class="yt-stat-num">5</div>
-        <div class="yt-stat-label">Comments</div>
-      </div>
-      <div class="yt-stat">
-        <div class="yt-stat-num">3</div>
-        <div class="yt-stat-label">Shares</div>
-      </div>
+    <div style="text-align:center;" class="reveal">
+      <a class="btn-primary" href="https://veracore.onrender.com" target="_blank" rel="noopener noreferrer">Open Veracore</a>
     </div>
-    <a class="yt-btn reveal" href="https://www.youtube.com/@TheGoodNeighborGuard" target="_blank" rel="noopener">▶ &nbsp;The Good Neighbor Guard on YouTube</a>
   </div>
 </section>
 
