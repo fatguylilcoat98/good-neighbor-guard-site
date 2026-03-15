@@ -225,7 +225,7 @@
     footer a{color:var(--teal);text-decoration:none;}
 
     /* ── REVEAL ── */
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;}
+    .reveal{opacity:1;transform:none;}
     .reveal.in{opacity:1;transform:none;}
 
     @media(max-width:768px){
@@ -323,11 +323,14 @@
     nav.style.top = promoH + 'px';
     document.body.style.paddingTop = (promoH + navH) + 'px';
   }
+  /* Run immediately AND on DOMContentLoaded to guarantee it fires */
+  tickPromo();
+  setInterval(tickPromo, 1000); /* tick every second so it stays live */
+
   document.addEventListener('DOMContentLoaded', function(){
     applyOffsets();
     window.addEventListener('resize', applyOffsets);
     tickPromo();
-    setInterval(tickPromo, 60000);
     var btn = document.querySelector('#bota-promo .bp-btn');
     if (btn) {
       btn.addEventListener('click', function(e){
