@@ -253,6 +253,8 @@
         <div class="bp-unit"><span class="bp-num" id="bp-hours">--</span><span class="bp-unit-label">hrs</span></div>
         <span class="bp-sep">:</span>
         <div class="bp-unit"><span class="bp-num" id="bp-mins">--</span><span class="bp-unit-label">min</span></div>
+        <span class="bp-sep">:</span>
+        <div class="bp-unit"><span class="bp-num" id="bp-secs">--</span><span class="bp-unit-label">sec</span></div>
       </div>
     </div>
     <div class="bp-right">
@@ -309,10 +311,11 @@
       return;
     }
     function pad(n){ return n < 10 ? '0'+n : ''+n; }
-    var d=document.getElementById('bp-days'), h=document.getElementById('bp-hours'), m=document.getElementById('bp-mins');
+    var d=document.getElementById('bp-days'), h=document.getElementById('bp-hours'), m=document.getElementById('bp-mins'), s=document.getElementById('bp-secs');
     if(d) d.textContent = pad(Math.floor(diff/(1000*60*60*24)));
     if(h) h.textContent = pad(Math.floor((diff%(1000*60*60*24))/(1000*60*60)));
     if(m) m.textContent = pad(Math.floor((diff%(1000*60*60))/(1000*60)));
+    if(s) s.textContent = pad(Math.floor((diff%(1000*60))/1000));
   }
   function applyOffsets() {
     var promo = document.getElementById('bota-promo');
