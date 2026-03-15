@@ -125,6 +125,8 @@
 
     /* ── SHARED SECTION STYLES ── */
     .section{padding:90px 24px;}
+    /* Offset for fixed nav + promo strip so anchor links aren't hidden */
+    .section, .pricing-section, .public-section, #bota-section, .hero { scroll-margin-top: 145px; }
     .section-center{text-align:center;}
     .wrap{max-width:1060px;margin:0 auto;}
     .eyebrow{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:block;}
@@ -528,7 +530,8 @@
         var target = document.getElementById('bota-section');
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          var offset = target.getBoundingClientRect().top + window.pageYOffset - 145;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
         }
       });
     }
