@@ -23,7 +23,7 @@
 
     /* ── NAV ── */
     .navbar{
-      position:fixed;top:0;left:0;right:0;z-index:999;
+      position:fixed;top:0;left:0;right:0;z-index:998;
       background:rgba(8,12,20,0.92);backdrop-filter:blur(16px);
       border-bottom:1px solid rgba(255,255,255,0.07);
       height:68px;display:flex;align-items:center;
@@ -508,6 +508,19 @@
   }
 
   /* Smooth scroll polyfill for the button */
+  function positionNav() {
+    var promo = document.getElementById('bota-promo');
+    var nav   = document.querySelector('.navbar');
+    var hero  = document.querySelector('.hero');
+    if (!promo || !nav) return;
+    var promoH = promo.getBoundingClientRect().height;
+    var navH   = nav.getBoundingClientRect().height;
+    nav.style.top = promoH + 'px';
+    if (hero) {
+      hero.style.paddingTop = (promoH + navH + 40) + 'px';
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     var btn = document.querySelector('#bota-promo .bp-btn');
     if (btn) {
@@ -520,7 +533,9 @@
       });
     }
     tickPromo();
-    setInterval(tickPromo, 60000); /* updates every minute — no seconds needed in promo */
+    setInterval(tickPromo, 60000);
+    positionNav();
+    window.addEventListener('resize', positionNav);
   });
 }());
 </script>
