@@ -294,15 +294,21 @@
 #bota-promo .bp-btn:hover { transform:translateY(-2px); opacity:0.92; }
 #bota-promo .bp-helper { font-size:10px; color:#5a5550; font-family:'Segoe UI',sans-serif; }
 @media (max-width:768px) {
-  /* Mobile: single compact row — just heading + button */
-  #bota-promo .bp-inner { flex-direction:row; text-align:left; padding:8px 14px; gap:10px; align-items:center; }
-  #bota-promo .bp-left { flex:1; min-width:0; }
+  /* Mobile: two compact rows — heading+button on top, mini countdown below */
+  #bota-promo .bp-inner { flex-direction:column; text-align:center; padding:8px 14px; gap:6px; align-items:center; }
+  #bota-promo .bp-left { width:100%; }
   #bota-promo .bp-eyebrow { display:none; }
-  #bota-promo .bp-heading { font-size:13px; margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #bota-promo .bp-heading { font-size:13px; margin-bottom:0; }
   #bota-promo .bp-sub { display:none; }
-  #bota-promo .bp-center { display:none; }
+  #bota-promo .bp-center { flex-direction:row; align-items:center; gap:6px; }
+  #bota-promo .bp-countdown-label { display:none; }
+  #bota-promo .bp-clock { padding:4px 10px; gap:3px; }
+  #bota-promo .bp-num { font-size:14px; }
+  #bota-promo .bp-unit { min-width:22px; }
+  #bota-promo .bp-unit-label { font-size:7px; }
+  #bota-promo .bp-sep { font-size:12px; margin-bottom:6px; }
   #bota-promo .bp-right { flex-shrink:0; }
-  #bota-promo .bp-btn { padding:7px 12px; font-size:11px; }
+  #bota-promo .bp-btn { padding:6px 14px; font-size:11px; }
   #bota-promo .bp-helper { display:none; }
 }
 </style>
