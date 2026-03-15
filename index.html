@@ -22,7 +22,6 @@
     body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
 
     /* ── NAV ── */
-    /* Sections offset for fixed promo + nav */
     .section, .pricing-section, #bota-section { scroll-margin-top: 145px; }
 
     .navbar{
@@ -237,7 +236,7 @@
 </head>
 <body>
 
-<!-- ░░░░░░░░░░ BATTLE PROMO STRIP — START ░░░░░░░░░░ -->
+<!-- ░░░░░░░░░░ BATTLE PROMO STRIP ░░░░░░░░░░ -->
 <div id="bota-promo">
   <div class="bp-inner">
     <div class="bp-left">
@@ -307,49 +306,44 @@
     var diff = REVEAL - new Date();
     if (diff <= 0) {
       var strip = document.getElementById('bota-promo');
-      if (strip) { strip.classList.add('bp-revealed'); strip.querySelector('.bp-sub').textContent = 'The votes are in. See who won below.'; }
+      if (strip) { strip.classList.add('bp-revealed'); strip.querySelector('.bp-sub').textContent = 'The votes are in. Download all three apps free — see who won below!'; }
       return;
     }
     function pad(n){ return n < 10 ? '0'+n : ''+n; }
-    var d=document.getElementById('bp-days'), h=document.getElementById('bp-hours'), m=document.getElementById('bp-mins'), s=document.getElementById('bp-secs');
-    if(d) d.textContent = pad(Math.floor(diff/(1000*60*60*24)));
-    if(h) h.textContent = pad(Math.floor((diff%(1000*60*60*24))/(1000*60*60)));
-    if(m) m.textContent = pad(Math.floor((diff%(1000*60*60))/(1000*60)));
-    if(s) s.textContent = pad(Math.floor((diff%(1000*60))/1000));
+    var d=document.getElementById('bp-days'),h=document.getElementById('bp-hours'),m=document.getElementById('bp-mins'),s=document.getElementById('bp-secs');
+    if(d) d.textContent=pad(Math.floor(diff/(1000*60*60*24)));
+    if(h) h.textContent=pad(Math.floor((diff%(1000*60*60*24))/(1000*60*60)));
+    if(m) m.textContent=pad(Math.floor((diff%(1000*60*60))/(1000*60)));
+    if(s) s.textContent=pad(Math.floor((diff%(1000*60))/1000));
   }
   function applyOffsets() {
-    var promo = document.getElementById('bota-promo');
-    var nav   = document.querySelector('.navbar');
-    if (!promo || !nav) return;
-    var promoH = promo.getBoundingClientRect().height;
-    var navH   = nav.getBoundingClientRect().height;
-    nav.style.top = promoH + 'px';
-    document.body.style.paddingTop = (promoH + navH) + 'px';
+    var promo=document.getElementById('bota-promo'),nav=document.querySelector('.navbar');
+    if(!promo||!nav) return;
+    var promoH=promo.getBoundingClientRect().height,navH=nav.getBoundingClientRect().height;
+    nav.style.top=promoH+'px';
+    document.body.style.paddingTop=(promoH+navH)+'px';
   }
-  /* Run immediately AND on DOMContentLoaded to guarantee it fires */
   tickPromo();
-  setInterval(tickPromo, 1000); /* tick every second so it stays live */
-
-  document.addEventListener('DOMContentLoaded', function(){
+  setInterval(tickPromo,1000);
+  document.addEventListener('DOMContentLoaded',function(){
     applyOffsets();
-    window.addEventListener('resize', applyOffsets);
-    tickPromo();
-    var btn = document.querySelector('#bota-promo .bp-btn');
-    if (btn) {
-      btn.addEventListener('click', function(e){
-        var target = document.getElementById('bota-section');
-        if (target) {
+    window.addEventListener('resize',applyOffsets);
+    var btn=document.querySelector('#bota-promo .bp-btn');
+    if(btn){
+      btn.addEventListener('click',function(e){
+        var target=document.getElementById('bota-section');
+        if(target){
           e.preventDefault();
-          var promoH = document.getElementById('bota-promo').getBoundingClientRect().height;
-          var navH   = document.querySelector('.navbar').getBoundingClientRect().height;
-          window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - promoH - navH, behavior:'smooth' });
+          var promoH=document.getElementById('bota-promo').getBoundingClientRect().height;
+          var navH=document.querySelector('.navbar').getBoundingClientRect().height;
+          window.scrollTo({top:target.getBoundingClientRect().top+window.pageYOffset-promoH-navH,behavior:'smooth'});
         }
       });
     }
   });
 }());
 </script>
-<!-- ░░░░░░░░░░ BATTLE PROMO STRIP — END ░░░░░░░░░░ -->
+<!-- ░░░░░░░░░░ BATTLE PROMO STRIP END ░░░░░░░░░░ -->
 
 <!-- NAV -->
 <nav class="navbar">
@@ -577,35 +571,6 @@
     </div>
   </div>
 </section>
-
-<!--
-  ============================================================
-  Battle of the AIs — Drop-In Section
-  Christopher Hughes · Sacramento, CA
-  The Good Neighbor Guard · @TheGoodNeighborGuard
-  AI Collaborators: Claude · GPT · Gemini · Groq
-  Truth · Safety · We Got Your Back.
-  ============================================================
-
-  YOUR WORKFLOW:
-  ──────────────
-  STEP 1 — Add your URL when you have it (you review privately):
-              gemini : { url: 'https://your-gemini-app.com', ready: false }
-
-  STEP 2 — Happy with it? Flip ready: true → Activate button goes live:
-              gemini : { url: 'https://your-gemini-app.com', ready: true }
-
-  STEP 3 — Audience clicks Activate → modal opens → they try the app
-           → they vote → "Thank you!" → modal closes → resets for next person.
-
-  JSONBIN VOTE STORAGE (free, 2 min):
-  ────────────────────────────────────
-  1. Go to https://jsonbin.io → free account
-  2. Create Bin with this JSON:
-     { "votes": { "gemini":{"1st":0,"2nd":0,"3rd":0}, "gpt":{"1st":0,"2nd":0,"3rd":0}, "claude":{"1st":0,"2nd":0,"3rd":0} }, "total": 0 }
-  3. Paste Bin ID + API Key into CONFIG below
-  ============================================================
--->
 
 <!--
   ============================================================
@@ -1300,488 +1265,6 @@
 </script>
 
 
-
-<style>
-#bota-section *, #bota-section *::before, #bota-section *::after { box-sizing: border-box; margin: 0; padding: 0; }
-#bota-modal *,  #bota-modal *::before,  #bota-modal *::after  { box-sizing: border-box; margin: 0; padding: 0; }
-
-#bota-section {
-  --b-bg:      #0f0f0f;
-  --b-surface: #181818;
-  --b-surface2:#222;
-  --b-border:  #2a2a2a;
-  --b-text:    #e8e0d5;
-  --b-muted:   #7a7570;
-  --b-accent:  #c8956c;
-  --b-gemini:  #5a9cf8;
-  --b-gpt:     #2ec99a;
-  --b-claude:  #d4855e;
-
-  position: relative; width: 100%;
-  background: var(--b-bg);
-  padding: 72px 20px 88px;
-  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  color: var(--b-text);
-  isolation: isolate;
-  border-top: 1px solid var(--b-border);
-  overflow: hidden;
-}
-#bota-section .bota-noise {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: 0.35;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  background-size: 256px 256px;
-}
-#bota-section .bota-header,
-#bota-section .bota-countdown,
-#bota-section .bota-ticker,
-#bota-section .bota-results-banner,
-#bota-section .bota-arena,
-#bota-section .bota-footer { position: relative; z-index: 1; }
-
-/* ── Header ── */
-#bota-section .bota-header { text-align: center; margin-bottom: 36px; }
-#bota-section .bota-eyebrow-wrap { margin-bottom: 18px; }
-#bota-section .bota-eyebrow {
-  display: inline-block; font-size: 10px; font-weight: 700;
-  letter-spacing: 0.22em; text-transform: uppercase; color: #c8956c;
-  border: 1px solid rgba(200,149,108,0.28); padding: 5px 16px; border-radius: 20px;
-  background: rgba(200,149,108,0.06);
-}
-#bota-section .bota-title {
-  font-size: clamp(32px,6vw,52px); font-weight: 800; color: #fff;
-  letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px;
-}
-#bota-section .bota-subtitle {
-  font-size: clamp(14px,2vw,16px); color: #7a7570;
-  line-height: 1.7; max-width: 500px; margin: 0 auto 12px;
-}
-
-/* ── Instruction line (GPT add) ── */
-#bota-section .bota-instruction {
-  font-size: 14px; color: #c8956c;
-  max-width: 500px; margin: 0 auto 18px;
-  line-height: 1.6; text-align: center;
-  font-style: italic; letter-spacing: 0.01em;
-}
-
-#bota-section .bota-veracore-tie {
-  font-size: 13px; color: #7a7570; max-width: 480px; margin: 0 auto; line-height: 1.6;
-}
-#bota-section .bota-vc-link {
-  color: #c8956c; text-decoration: none; font-weight: 600;
-  border-bottom: 1px solid rgba(200,149,108,0.3); transition: color 0.2s, border-color 0.2s;
-}
-#bota-section .bota-vc-link:hover { color: #fff; border-color: #fff; }
-
-/* ── Countdown (GPT add) ── */
-#bota-section .bota-countdown {
-  text-align: center; margin: 0 auto 28px;
-}
-#bota-section .bota-countdown-label {
-  display: block; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: #7a7570; margin-bottom: 14px;
-}
-#bota-section .bota-countdown-clock {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid #2a2a2a;
-  border-radius: 14px; padding: 14px 24px;
-}
-#bota-section .bota-clock-unit {
-  display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 44px;
-}
-#bota-section .bota-clock-num {
-  font-size: 28px; font-weight: 800; color: #fff;
-  line-height: 1; font-variant-numeric: tabular-nums;
-  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-}
-#bota-section .bota-clock-unit-label {
-  font-size: 9px; font-weight: 600; letter-spacing: 0.15em;
-  text-transform: uppercase; color: #7a7570;
-}
-#bota-section .bota-clock-sep {
-  font-size: 24px; font-weight: 700; color: #c8956c;
-  line-height: 1; margin-bottom: 14px; /* nudge up to align with numbers */
-}
-/* Hide countdown after reveal date */
-#bota-section .bota-countdown.bota-revealed {
-  display: none;
-}
-
-/* ── Ticker ── */
-#bota-section .bota-ticker {
-  display: flex; align-items: center; justify-content: center; gap: 9px;
-  margin: 0 auto 44px; width: fit-content;
-  background: rgba(200,149,108,0.07); border: 1px solid rgba(200,149,108,0.18);
-  border-radius: 50px; padding: 9px 22px;
-  font-size: 13px; color: #c8956c; font-weight: 500; letter-spacing: 0.02em;
-}
-#bota-section .bota-ticker-dot {
-  width: 7px; height: 7px; border-radius: 50%; background: #c8956c; flex-shrink: 0;
-  animation: bota-blink 1.8s ease-in-out infinite;
-}
-@keyframes bota-blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
-
-/* ── Results banner ── */
-#bota-section .bota-results-banner {
-  max-width: 740px; margin: 0 auto 52px;
-  background: rgba(200,149,108,0.07); border: 1px solid rgba(200,149,108,0.3);
-  border-radius: 18px; padding: 36px 28px;
-}
-#bota-section .bota-results-header {
-  display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 28px;
-}
-#bota-section .bota-results-trophy { font-size: 26px; }
-#bota-section .bota-results-title { font-size: 18px; font-weight: 700; color: #c8956c; letter-spacing: 0.06em; text-transform: uppercase; }
-#bota-section .bota-results-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-#bota-section .bota-result-card { background: #181818; border: 1px solid #2a2a2a; border-radius: 12px; padding: 18px 14px; text-align: center; }
-#bota-section .bota-result-name { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 12px; }
-#bota-section .bota-result-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #7a7570; padding: 4px 0; border-bottom: 1px solid #2a2a2a; }
-#bota-section .bota-result-row:last-child { border-bottom: none; }
-#bota-section .bota-result-row strong { color: #e8e0d5; font-weight: 600; }
-
-/* ── Arena ── */
-#bota-section .bota-arena { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; max-width: 1080px; margin: 0 auto; }
-
-/* ── Cards ── */
-#bota-section .bota-card { background: #181818; border: 1px solid #2a2a2a; border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.3s ease; }
-#bota-section .bota-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-#bota-section .bota-card-accent { height: 3px; width: 100%; }
-#bota-section [data-ai="gemini"] .bota-card-accent { background: linear-gradient(90deg,#4285F4,#9B72CB); }
-#bota-section [data-ai="gpt"]    .bota-card-accent { background: linear-gradient(90deg,#10a37f,#0d6b53); }
-#bota-section [data-ai="claude"] .bota-card-accent { background: linear-gradient(90deg,#CC785C,#8B4513); }
-#bota-section .bota-card-mid { border-color: rgba(200,149,108,0.35); position: relative; }
-#bota-section .bota-mid-tag { position: absolute; top: 3px; left: 50%; transform: translateX(-50%); background: #c8956c; color: #fff; font-size: 9px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; padding: 3px 12px; border-radius: 0 0 8px 8px; white-space: nowrap; z-index: 2; }
-#bota-section .bota-card-inner { padding: 24px 22px 26px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
-#bota-section .bota-card-head { display: flex; align-items: center; gap: 14px; }
-#bota-section .bota-logo { width: 52px; height: 52px; flex-shrink: 0; border-radius: 14px; padding: 10px; display: flex; align-items: center; justify-content: center; }
-#bota-section .bota-logo svg { width: 100%; height: 100%; }
-#bota-section .bota-logo-gemini { background: rgba(66,133,244,0.12); border: 1px solid rgba(66,133,244,0.2); }
-#bota-section .bota-logo-gpt    { background: rgba(16,163,127,0.12); border: 1px solid rgba(16,163,127,0.2); }
-#bota-section .bota-logo-claude { background: rgba(204,120,92,0.12);  border: 1px solid rgba(204,120,92,0.2); }
-#bota-section .bota-card-identity { display: flex; flex-direction: column; gap: 3px; }
-#bota-section .bota-name { font-size: 20px; font-weight: 700; line-height: 1; }
-#bota-section [data-ai="gemini"] .bota-name { color: #5a9cf8; }
-#bota-section [data-ai="gpt"]    .bota-name { color: #2ec99a; }
-#bota-section [data-ai="claude"] .bota-name { color: #d4855e; }
-#bota-section .bota-maker { font-size: 11px; color: #7a7570; text-transform: uppercase; letter-spacing: 0.08em; }
-#bota-section .bota-card-desc { font-size: 13px; color: #7a7570; line-height: 1.65; padding-bottom: 14px; border-bottom: 1px solid #2a2a2a; }
-
-/* Card tally */
-#bota-section .bota-card-tally { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
-#bota-section .bota-tally-item { font-size: 11px; color: #7a7570; background: #222; border: 1px solid #2a2a2a; border-radius: 20px; padding: 3px 10px; }
-
-/* Locked state */
-#bota-section .bota-locked-state { width: 100%; border-radius: 10px; margin-top: auto; border: 1px dashed #2a2a2a; background: rgba(255,255,255,0.015); padding: 32px 16px; }
-#bota-section .bota-locked-inner { display: flex; flex-direction: column; align-items: center; gap: 7px; text-align: center; }
-#bota-section .bota-locked-icon { font-size: 24px; opacity: 0.45; }
-#bota-section .bota-locked-label { font-size: 13px; font-weight: 600; color: #7a7570; }
-#bota-section .bota-locked-sub { font-size: 11px; color: #3a3a3a; letter-spacing: 0.1em; text-transform: uppercase; }
-
-/* Activate button */
-#bota-section .bota-activate { position: relative; overflow: hidden; width: 100%; padding: 14px 20px; border: none; border-radius: 10px; cursor: pointer; margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.04em; color: #fff; outline: none; transition: transform 0.15s ease, opacity 0.2s ease; }
-#bota-section [data-ai="gemini"] .bota-activate { background: linear-gradient(135deg,#3b70d8,#7b5ac0); box-shadow: 0 4px 20px rgba(66,133,244,0.3); }
-#bota-section [data-ai="gpt"]    .bota-activate { background: linear-gradient(135deg,#0d8f70,#0a6652); box-shadow: 0 4px 20px rgba(16,163,127,0.3); }
-#bota-section [data-ai="claude"] .bota-activate { background: linear-gradient(135deg,#b8683e,#8b3e13); box-shadow: 0 4px 20px rgba(204,120,92,0.3); }
-#bota-section .bota-activate:hover  { transform: translateY(-2px); opacity: 0.92; }
-#bota-section .bota-activate:active { transform: scale(0.98); }
-#bota-section .bota-activate-ring { position: absolute; inset: 0; border-radius: 10px; pointer-events: none; animation: bota-ring 2.2s ease-out infinite; }
-#bota-section [data-ai="gemini"] .bota-activate-ring { box-shadow: 0 0 0 0 rgba(90,156,248,0.5); }
-#bota-section [data-ai="gpt"]    .bota-activate-ring { box-shadow: 0 0 0 0 rgba(46,201,154,0.5); }
-#bota-section [data-ai="claude"] .bota-activate-ring { box-shadow: 0 0 0 0 rgba(212,133,94,0.5); }
-@keyframes bota-ring { 0%{opacity:1;} 60%{box-shadow:0 0 0 10px transparent;opacity:0;} 100%{opacity:0;} }
-#bota-section .bota-activate-icon { font-size: 11px; opacity: 0.8; }
-#bota-section .bota-activate-label { position: relative; z-index: 1; }
-
-/* Footer */
-#bota-section .bota-footer { text-align: center; margin-top: 48px; display: flex; flex-direction: column; gap: 8px; }
-#bota-section .bota-footer-main { font-size: 14px; color: #7a7570; }
-#bota-section .bota-footer-main strong { color: #c8956c; }
-#bota-section .bota-footer-sub { font-size: 13px; color: #7a7570; }
-
-/* ═══════════ MODAL ═══════════ */
-#bota-modal { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 16px; animation: bota-modal-in 0.25s ease; }
-@keyframes bota-modal-in { from{opacity:0;} to{opacity:1;} }
-#bota-modal .bota-modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.82); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
-#bota-modal .bota-modal-box { position: relative; z-index: 1; background: #181818; border-radius: 20px; border: 1px solid #2a2a2a; width: 100%; max-width: 860px; max-height: 92vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.8); animation: bota-box-in 0.3s cubic-bezier(0.34,1.56,0.64,1); }
-@keyframes bota-box-in { from{opacity:0;transform:scale(0.92) translateY(20px);} to{opacity:1;transform:none;} }
-#bota-modal .bota-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; border-bottom: 1px solid #2a2a2a; flex-shrink: 0; }
-#bota-modal .bota-modal-title-wrap { display: flex; align-items: center; gap: 14px; }
-#bota-modal .bota-modal-logo { width: 42px; height: 42px; border-radius: 12px; padding: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-#bota-modal .bota-modal-logo svg { width: 100%; height: 100%; }
-#bota-modal .bota-modal-logo.ml-gemini { background: rgba(66,133,244,0.12); border: 1px solid rgba(66,133,244,0.2); }
-#bota-modal .bota-modal-logo.ml-gpt    { background: rgba(16,163,127,0.12); border: 1px solid rgba(16,163,127,0.2); }
-#bota-modal .bota-modal-logo.ml-claude { background: rgba(204,120,92,0.12);  border: 1px solid rgba(204,120,92,0.2); }
-#bota-modal .bota-modal-ai-name { font-size: 18px; font-weight: 700; color: #fff; }
-#bota-modal .bota-modal-ai-name.mn-gemini { color: #5a9cf8; }
-#bota-modal .bota-modal-ai-name.mn-gpt    { color: #2ec99a; }
-#bota-modal .bota-modal-ai-name.mn-claude { color: #d4855e; }
-#bota-modal .bota-modal-ai-maker { font-size: 11px; color: #7a7570; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
-#bota-modal .bota-modal-close { width: 36px; height: 36px; border-radius: 50%; border: 1px solid #2a2a2a; background: #222; color: #7a7570; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, color 0.2s; flex-shrink: 0; font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; }
-#bota-modal .bota-modal-close:hover { background: #333; color: #fff; }
-#bota-modal .bota-modal-frame-wrap { position: relative; flex: 1; min-height: 0; background: #111; }
-#bota-modal .bota-modal-loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: #7a7570; font-size: 14px; font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; }
-#bota-modal .bota-spinner { width: 32px; height: 32px; border-radius: 50%; border: 3px solid #2a2a2a; border-top-color: #c8956c; animation: bota-spin 0.8s linear infinite; }
-@keyframes bota-spin { to{ transform: rotate(360deg); } }
-#bota-modal #bota-modal-iframe { width: 100%; height: 100%; min-height: 400px; border: none; display: block; }
-#bota-modal .bota-modal-vote { padding: 20px 22px; border-top: 1px solid #2a2a2a; background: #181818; flex-shrink: 0; }
-#bota-modal .bota-modal-vote-prompt { font-size: 13px; font-weight: 600; color: #7a7570; letter-spacing: 0.04em; text-align: center; margin-bottom: 14px; font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; }
-#bota-modal .bota-modal-vote-btns { display: flex; gap: 10px; }
-#bota-modal .bota-mrank { flex: 1; padding: 12px 8px; border-radius: 10px; border: 1px solid #2a2a2a; background: #222; color: #e8e0d5; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; transition: all 0.18s ease; }
-#bota-modal .bota-mrank:hover:not(:disabled) { transform: translateY(-2px); }
-#bota-modal .bota-mgold:hover:not(:disabled)   { background: rgba(255,215,0,0.12);   border-color: gold;    color: gold; }
-#bota-modal .bota-msilver:hover:not(:disabled) { background: rgba(192,192,192,0.1);  border-color: silver;  color: silver; }
-#bota-modal .bota-mbronze:hover:not(:disabled) { background: rgba(205,127,50,0.1);   border-color: #cd7f32; color: #cd7f32; }
-#bota-modal .bota-modal-thanks { position: absolute; inset: 0; background: #181818; display: flex; align-items: center; justify-content: center; z-index: 10; animation: bota-fadein 0.35s ease; }
-@keyframes bota-fadein { from{opacity:0;} to{opacity:1;} }
-#bota-modal .bota-thanks-inner { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 40px 32px; font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; }
-#bota-modal .bota-thanks-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(200,149,108,0.12); border: 2px solid rgba(200,149,108,0.4); color: #c8956c; font-size: 28px; display: flex; align-items: center; justify-content: center; }
-#bota-modal .bota-thanks-headline { font-size: 28px; font-weight: 800; color: #fff; }
-#bota-modal .bota-thanks-sub { font-size: 15px; color: #7a7570; line-height: 1.6; max-width: 340px; }
-#bota-modal .bota-thanks-close { margin-top: 8px; padding: 12px 32px; border: none; border-radius: 10px; cursor: pointer; background: linear-gradient(135deg,#b8683e,#8b3e13); color: #fff; font-size: 14px; font-weight: 700; font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; transition: opacity 0.2s, transform 0.15s; }
-#bota-modal .bota-thanks-close:hover { opacity: 0.88; transform: translateY(-1px); }
-
-/* ── Mobile ── */
-@media (max-width: 820px) {
-  #bota-section { padding: 56px 16px 72px; }
-  #bota-section .bota-arena { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; gap: 16px; }
-  #bota-section .bota-mid-tag { display: none; }
-  #bota-section .bota-results-grid { grid-template-columns: 1fr; }
-  #bota-section .bota-card:hover { transform: none; }
-  #bota-section .bota-countdown-clock { padding: 12px 16px; gap: 4px; }
-  #bota-section .bota-clock-num { font-size: 22px; }
-  #bota-section .bota-clock-unit { min-width: 36px; }
-  #bota-modal .bota-modal-vote-btns { flex-direction: column; }
-  #bota-modal #bota-modal-iframe { min-height: 300px; }
-}
-</style>
-
-
-<script>
-(function () {
-
-  /* ══════════════════════════════════════════════════════
-     CONFIG — your only touchpoint
-
-     STEP 1: Add URL when you have it (review privately)
-     STEP 2: Flip ready: true when happy → Activate goes live
-  ══════════════════════════════════════════════════════ */
-  var APPS = {
-    gemini : { url: 'https://gng-project-ripple-gemni.onrender.com', ready: true },
-    gpt    : { url: 'https://gng-ai-battle-app.onrender.com', ready: true },
-    claude : { url: 'https://gng-kindness-chain.onrender.com', ready: true }
-  };
-
-  var BIN_ID  = 'YOUR_JSONBIN_BIN_ID';
-  var API_KEY = 'YOUR_JSONBIN_API_KEY';
-  /* ══════════════════════════════════════════════════ */
-
-  var API    = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
-  var HEADS  = { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY };
-  var REVEAL = new Date('2026-04-04T00:00:00');
-
-  var AI_META = {
-    gemini : { name:'Gemini',  maker:'Google DeepMind', logoClass:'ml-gemini', nameClass:'mn-gemini', svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 3C20 3 11 12 11 20C11 28 20 37 20 37C20 37 29 28 29 20C29 12 20 3 20 3Z" fill="#4285F4"/><path d="M3 20C3 20 12 11 20 11C28 11 37 20 37 20C37 20 28 29 20 29C12 29 3 20 3 20Z" fill="#9B72CB" opacity="0.75"/></svg>' },
-    gpt    : { name:'ChatGPT', maker:'OpenAI',          logoClass:'ml-gpt',    nameClass:'mn-gpt',    svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="15" stroke="#10a37f" stroke-width="2"/><path d="M13 17L20 12L27 17V23L20 28L13 23V17Z" fill="#10a37f" opacity="0.9"/><circle cx="20" cy="20" r="3.5" fill="white" opacity="0.9"/></svg>' },
-    claude : { name:'Claude',  maker:'Anthropic',       logoClass:'ml-claude', nameClass:'mn-claude', svg:'<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 4L33 12V28L20 36L7 28V12L20 4Z" fill="#CC785C"/><path d="M15 17L20 14L25 17V23L20 26L15 23V17Z" fill="white" opacity="0.2"/><path d="M20 18V22M18 20H22" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>' }
-  };
-
-  var currentAI = null;
-
-  /* ── Init ── */
-  function init() {
-    ['gemini','gpt','claude'].forEach(function(ai) {
-      var app    = APPS[ai];
-      var locked = document.getElementById('bota-locked-' + ai);
-      var btn    = document.getElementById('bota-btn-' + ai);
-      if (app.url && app.ready) {
-        if (locked) locked.style.display = 'none';
-        if (btn)    btn.style.display    = 'flex';
-      } else {
-        if (locked) locked.style.display = 'block';
-        if (btn)    btn.style.display    = 'none';
-      }
-    });
-
-    startCountdown();
-
-    if (BIN_ID !== 'YOUR_JSONBIN_BIN_ID') {
-      fetch(API + '/latest', { headers: { 'X-Master-Key': API_KEY } })
-        .then(function(r){ return r.json(); })
-        .then(function(d){
-          setTicker(d.record.total || 0);
-          updateAllTallies(d.record.votes);
-          if (new Date() >= REVEAL) renderResults(d.record.votes);
-        })
-        .catch(function(){});
-    }
-  }
-
-  /* ── Countdown ── */
-  function startCountdown() {
-    function tick() {
-      var now  = new Date();
-      var diff = REVEAL - now;
-
-      if (diff <= 0) {
-        /* Past reveal date — hide countdown */
-        var cd = document.getElementById('bota-countdown');
-        if (cd) cd.classList.add('bota-revealed');
-        return;
-      }
-
-      var days  = Math.floor(diff / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      var secs  = Math.floor((diff % (1000 * 60)) / 1000);
-
-      function pad(n){ return n < 10 ? '0' + n : '' + n; }
-
-      var dEl = document.getElementById('bota-cd-days');
-      var hEl = document.getElementById('bota-cd-hours');
-      var mEl = document.getElementById('bota-cd-mins');
-      var sEl = document.getElementById('bota-cd-secs');
-
-      if (dEl) dEl.textContent = pad(days);
-      if (hEl) hEl.textContent = pad(hours);
-      if (mEl) mEl.textContent = pad(mins);
-      if (sEl) sEl.textContent = pad(secs);
-    }
-
-    tick();
-    setInterval(tick, 1000);
-  }
-
-  /* ── Ticker ── */
-  function setTicker(total) {
-    var past = new Date() >= REVEAL;
-    document.getElementById('bota-ticker-text').textContent = past
-      ? total + ' total votes cast — results are in!'
-      : total + ' vote' + (total !== 1 ? 's' : '') + ' cast — full results sealed until April 4th';
-  }
-
-  /* ── Card tallies ── */
-  function updateAllTallies(votes) {
-    ['gemini','gpt','claude'].forEach(function(ai){
-      var v     = votes[ai] || {'1st':0,'2nd':0,'3rd':0};
-      var total = (v['1st']||0) + (v['2nd']||0) + (v['3rd']||0);
-      if (total > 0) {
-        var tally = document.getElementById('bota-tally-' + ai);
-        if (tally) {
-          tally.style.display = 'flex';
-          document.getElementById('bota-t1-' + ai).textContent = '🥇 ' + v['1st'];
-          document.getElementById('bota-t2-' + ai).textContent = '🥈 ' + v['2nd'];
-          document.getElementById('bota-t3-' + ai).textContent = '🥉 ' + v['3rd'];
-        }
-      }
-    });
-  }
-
-  /* ── Results ── */
-  function renderResults(votes) {
-    var banner = document.getElementById('bota-results-banner');
-    var grid   = document.getElementById('bota-results-grid');
-    [{key:'gemini',label:'Gemini'},{key:'gpt',label:'ChatGPT'},{key:'claude',label:'Claude'}]
-      .forEach(function(ai){
-        var v = votes[ai.key] || {'1st':0,'2nd':0,'3rd':0};
-        var c = document.createElement('div');
-        c.className = 'bota-result-card';
-        c.innerHTML =
-          '<div class="bota-result-name">' + ai.label + '</div>' +
-          '<div class="bota-result-row"><span>🥇 Best</span><strong>' + v['1st'] + ' votes</strong></div>' +
-          '<div class="bota-result-row"><span>🥈 Middle</span><strong>' + v['2nd'] + ' votes</strong></div>' +
-          '<div class="bota-result-row"><span>🥉 Third</span><strong>' + v['3rd'] + ' votes</strong></div>';
-        grid.appendChild(c);
-      });
-    banner.style.display = 'block';
-  }
-
-  /* ── Open modal ── */
-  window.botaOpen = function(aiKey) {
-    var app  = APPS[aiKey];
-    var meta = AI_META[aiKey];
-    if (!app || !app.url || !app.ready) return;
-    currentAI = aiKey;
-
-    var logo   = document.getElementById('bota-modal-logo');
-    logo.innerHTML  = meta.svg;
-    logo.className  = 'bota-modal-logo ' + meta.logoClass;
-    var nameEl = document.getElementById('bota-modal-ai-name');
-    nameEl.textContent = meta.name;
-    nameEl.className   = 'bota-modal-ai-name ' + meta.nameClass;
-    document.getElementById('bota-modal-ai-maker').textContent = meta.maker;
-
-    document.getElementById('bota-modal-vote').style.display   = 'block';
-    document.getElementById('bota-modal-thanks').style.display = 'none';
-    document.querySelectorAll('#bota-modal .bota-mrank').forEach(function(b){
-      b.disabled = false; b.style.opacity = '';
-    });
-
-    var loading = document.getElementById('bota-modal-loading');
-    var iframe  = document.getElementById('bota-modal-iframe');
-    loading.style.display = 'flex';
-    iframe.style.opacity  = '0';
-    iframe.src = '';
-    setTimeout(function(){
-      iframe.src = app.url;
-      iframe.onload = function(){
-        loading.style.display = 'none';
-        iframe.style.opacity  = '1';
-      };
-    }, 80);
-
-    document.getElementById('bota-modal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  };
-
-  /* ── Close modal ── */
-  window.botaClose = function() {
-    document.getElementById('bota-modal').style.display = 'none';
-    document.getElementById('bota-modal-iframe').src    = '';
-    document.body.style.overflow = '';
-    currentAI = null;
-  };
-
-  /* ── Vote ── */
-  window.botaModalVote = function(rank) {
-    if (!currentAI) return;
-    var aiKey = currentAI;
-
-    document.querySelectorAll('#bota-modal .bota-mrank').forEach(function(b){ b.disabled = true; });
-
-    var labels = {'1st':'Best 🥇','2nd':'Middle of the pack 🥈','3rd':'Third place 🥉'};
-    document.getElementById('bota-thanks-sub').textContent =
-      'You ranked ' + AI_META[aiKey].name + ' — ' + (labels[rank] || rank) + '. Your vote is counted.';
-    document.getElementById('bota-modal-thanks').style.display = 'flex';
-
-    localStorage.setItem('bota_voted_' + aiKey, rank);
-
-    if (BIN_ID !== 'YOUR_JSONBIN_BIN_ID') {
-      fetch(API + '/latest', { headers: { 'X-Master-Key': API_KEY } })
-        .then(function(r){ return r.json(); })
-        .then(function(d){
-          var rec = d.record;
-          rec.votes[aiKey][rank] = (rec.votes[aiKey][rank] || 0) + 1;
-          rec.total = (rec.total || 0) + 1;
-          return fetch(API, { method:'PUT', headers:HEADS, body:JSON.stringify(rec) });
-        })
-        .then(function(r){ return r.json(); })
-        .then(function(d){
-          setTicker(d.record.total || 0);
-          updateAllTallies(d.record.votes);
-        })
-        .catch(function(){});
-    }
-  };
-
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') botaClose(); });
-
-  init();
-}());
-</script>
-
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo-row">
@@ -1789,10 +1272,8 @@
     <span class="footer-brand">The Good Neighbor Guard</span>
   </div>
   <p>Built for family — and everyone who deserves a real answer.</p>
-  <p><a href="/cdn-cgi/l/email-protection#9de9f5f8faf2f2f9f3f8f4faf5fff2effae8fceff9ddfaf0fcf4f1b3fef2f0"><span class="__cf_email__" data-cfemail="03776b66646c6c676d666a646b616c71647662716743646e626a6f2d606c6e">[email&#160;protected]</span></a></p>
-  <p style="margin-top:16px;">© 202 => { if(e.isIntersecting) e.target.classList.add('in'); });
-  }, {threshold:0.1});
-  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
-</script>
-</body>
-</html>
+  <p><a href="/cdn-cgi/l/email-protection#51253934363e3e353f34383639333e23362430233511363c30383d7f323e3c"><span class="__cf_email__" data-cfemail="384c505d5f57575c565d515f505a574a5f4d594a5c785f55595154165b5755">[email&#160;protected]</span></a></p>
+  <p style="margin-top:16px;">© 2026 Christopher Hughes · Truth · Safety · We Got Your Back</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></scr
