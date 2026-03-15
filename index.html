@@ -634,7 +634,7 @@
 
   <div class="bota-ticker" id="bota-ticker">
     <span class="bota-ticker-dot"></span>
-    <span id="bota-ticker-text">Voting opens soon</span>
+    <span id="bota-ticker-text">0 votes cast — full results sealed until April 4th</span>
   </div>
 
   <div class="bota-results-banner" id="bota-results-banner" style="display:none;">
@@ -1098,7 +1098,7 @@
     buildCards();
     startCountdown();
 
-    if (!BIN_ID) {
+    if (BIN_ID) {
       fetch(API + '/latest', { headers:{ 'X-Master-Key':API_KEY } })
         .then(function(r){ return r.json(); })
         .then(function(d){
@@ -1246,7 +1246,7 @@
     }
 
     /* Push to JSONBin */
-    if (!BIN_ID) {
+    if (BIN_ID) {
       fetch(API + '/latest', { headers:{ 'X-Master-Key':API_KEY } })
         .then(function(r){ return r.json(); })
         .then(function(d){
