@@ -239,6 +239,8 @@
     footer p{font-size:12px;color:var(--faint);margin-bottom:5px;line-height:1.6;}
     footer a{color:var(--teal);text-decoration:none;}
 
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.1)}}
+
     @media(max-width:768px){
       .navbar{padding:0 20px;}
       .nav-links{display:none;}
@@ -364,8 +366,17 @@
         </div>
       </div>
 
+      <div class="result-loading" id="resultLoading" style="display:none;text-align:center;padding:28px;color:var(--muted);">
+        <div style="font-size:24px;margin-bottom:10px;animation:pulse 1.2s ease-in-out infinite;">&#9711;</div>
+        Running through CLASPION pipeline...
+      </div>
+
       <div class="result-card" id="resultCard">
         <div class="result-decision" id="resultDecision"></div>
+        <div class="result-row">
+          <div class="result-label">Risk Level</div>
+          <div class="result-value" id="resultRisk"></div>
+        </div>
         <div class="result-row">
           <div class="result-label">Why</div>
           <div class="result-value" id="resultWhy"></div>
@@ -378,6 +389,11 @@
           <div class="result-label">Recommended Next Step</div>
           <div class="result-value" id="resultNext"></div>
         </div>
+        <div class="result-row" id="resultGatesRow" style="display:none;">
+          <div class="result-label">Gates Passed</div>
+          <div class="result-value" id="resultGates"></div>
+        </div>
+        <div class="result-meta" id="resultMeta" style="margin-top:16px;font-size:11px;color:var(--faint);letter-spacing:0.05em;"></div>
       </div>
     </div>
   </div>
@@ -431,45 +447,139 @@
 </footer>
 
 <script>
+var CLASPION_API = 'https://the-handshake.onrender.com/claspion';
+
 function fillScenario(el) {
   document.getElementById('scenarioInput').value = el.textContent.trim();
 }
 
-function runScenario() {
-  var input = document.getElementById('scenarioInput').value.trim().toLowerCase();
-  if (!input) return;
+function mapDecision(data) {
+  /* Map real CLASPION output to website display categories */
+  var fd = (data.final_decision || '').toLowerCase();
+  var displayDecision = (data.display || {}).DECISION || '';
+  var riskLevel = (data.display || {}).RISK_LEVEL || '';
+  var he = data.handshake_engine || {};
+  var heOutcome = (he.execution_outcome || '').toUpperCase();
 
   var decision, why, changed, next;
 
-  if (/wire|transfer|pressure|urgency|coercion/i.test(input)) {
-    decision = 'PAUSE';
-    why = 'Conditions changed before execution and require verification.';
-    changed = 'Human pressure or authority stability shifted.';
-    next = 'Verify intent and authority before proceeding.';
-  } else if (/prescription|patient|medication|changed context|clinical/i.test(input)) {
-    decision = 'ESCALATE';
-    why = 'Clinical context changed and requires review.';
-    changed = 'Patient context is no longer stable.';
-    next = 'Route for human review before action continues.';
-  } else if (/destructive|delete|unstable|unsafe|destroy|drop|remove/i.test(input)) {
-    decision = 'ESCALATE';
-    why = 'Current conditions do not justify execution.';
-    changed = 'Operating conditions became unsafe.';
-    next = 'Halt action and investigate before proceeding.';
+  if (fd === 'allowed' || displayDecision === 'APPROVED') {
+    decision = 'ALLOW';
+    why = he.user_message || 'Action is admissible under current conditions.';
+    changed = 'No changes detected that would invalidate execution.';
+    next = 'Proceed with execution.';
+  } else if (fd === 'blocked' || displayDecision === 'BLOCKED') {
+    if (riskLevel === 'CRITICAL') {
+      decision = 'ESCALATE';
+      why = he.user_message || (data.block_reasons || []).join('; ') || 'Action blocked — critical risk detected.';
+      changed = 'Conditions have changed in a way that makes execution unsafe.';
+      next = 'Do not proceed. Route for human review and intervention.';
+    } else {
+      decision = 'ESCALATE';
+      why = he.user_message || (data.block_reasons || []).join('; ') || 'Action blocked — elevated risk.';
+      changed = 'Execution conditions no longer justify proceeding.';
+      next = 'Halt action and investigate before proceeding.';
+    }
   } else {
+    /* deferred, pending_review, or anything else */
     decision = 'PAUSE';
-    why = 'Scenario needs runtime verification.';
-    changed = 'Conditions before execution are unclear or changed.';
-    next = 'Review changed conditions before execution continues.';
+    why = he.user_message || 'Conditions require verification before execution can continue.';
+    changed = 'Runtime conditions are unclear or shifted since approval.';
+    next = 'Verify changed conditions before execution continues.';
   }
 
-  var card = document.getElementById('resultCard');
-  card.className = 'result-card active ' + decision;
-  document.getElementById('resultDecision').textContent = decision;
-  document.getElementById('resultWhy').textContent = why;
-  document.getElementById('resultChanged').textContent = changed;
-  document.getElementById('resultNext').textContent = next;
+  return {
+    decision: decision,
+    why: why,
+    changed: changed,
+    next: next,
+    riskLevel: riskLevel,
+    gatesPassed: he.gates_passed,
+    gatesTotal: he.gates_total,
+    riskScore: he.risk_score,
+    elapsedMs: data.elapsed_ms,
+    claspionVersion: data.claspion_version,
+    heOutcome: heOutcome,
+  };
+}
 
+async function runScenario() {
+  var input = document.getElementById('scenarioInput').value.trim();
+  if (!input) return;
+
+  var btn = document.querySelector('.scenario-run');
+  var loading = document.getElementById('resultLoading');
+  var card = document.getElementById('resultCard');
+
+  /* Show loading, hide previous result */
+  btn.disabled = true;
+  btn.textContent = 'EVALUATING...';
+  loading.style.display = 'block';
+  card.className = 'result-card';
+
+  /* Debug: log submitted input */
+  console.log('[CLASPION] Submitting scenario:', input);
+
+  try {
+    var res = await fetch(CLASPION_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: input,
+        domain: 'general',
+        actor_id: 'website_visitor'
+      })
+    });
+
+    var data = await res.json();
+
+    /* Debug: log raw response */
+    console.log('[CLASPION] Raw response:', JSON.stringify(data, null, 2));
+
+    var result = mapDecision(data);
+
+    /* Render result card */
+    card.className = 'result-card active ' + result.decision;
+    document.getElementById('resultDecision').textContent = result.decision;
+    document.getElementById('resultRisk').textContent = result.riskLevel || 'N/A';
+    document.getElementById('resultWhy').textContent = result.why;
+    document.getElementById('resultChanged').textContent = result.changed;
+    document.getElementById('resultNext').textContent = result.next;
+
+    /* Gates info */
+    var gatesRow = document.getElementById('resultGatesRow');
+    if (result.gatesPassed !== undefined && result.gatesTotal !== undefined) {
+      document.getElementById('resultGates').textContent = result.gatesPassed + ' / ' + result.gatesTotal;
+      gatesRow.style.display = 'block';
+    } else {
+      gatesRow.style.display = 'none';
+    }
+
+    /* Meta info */
+    var metaParts = [];
+    if (result.claspionVersion) metaParts.push('CLASPION ' + result.claspionVersion);
+    if (result.elapsedMs) metaParts.push(result.elapsedMs + 'ms');
+    if (result.heOutcome) metaParts.push('Engine: ' + result.heOutcome);
+    if (result.riskScore !== undefined) metaParts.push('Risk Score: ' + result.riskScore);
+    document.getElementById('resultMeta').textContent = metaParts.join(' · ');
+
+  } catch (err) {
+    console.error('[CLASPION] API error:', err);
+
+    /* Fallback: show error state */
+    card.className = 'result-card active PAUSE';
+    document.getElementById('resultDecision').textContent = 'PAUSE';
+    document.getElementById('resultRisk').textContent = 'UNKNOWN';
+    document.getElementById('resultWhy').textContent = 'Could not reach the CLASPION evaluator. The service may be starting up — try again in a moment.';
+    document.getElementById('resultChanged').textContent = 'Connection unavailable.';
+    document.getElementById('resultNext').textContent = 'Wait a moment and try again.';
+    document.getElementById('resultGatesRow').style.display = 'none';
+    document.getElementById('resultMeta').textContent = 'Fallback — evaluator unreachable';
+  }
+
+  loading.style.display = 'none';
+  btn.disabled = false;
+  btn.textContent = 'RUN SCENARIO';
   card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 </script>
