@@ -241,6 +241,35 @@
 
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.1)}}
 
+    /* ── RATE LIMIT CARD ── */
+    .limit-card{
+      margin-top:24px;text-align:center;
+      background:var(--bg2);border:1px solid rgba(255,255,255,0.1);
+      border-radius:14px;padding:40px 28px;
+      animation:fadeUp 0.4s ease;
+    }
+    .limit-icon{
+      font-size:32px;color:var(--faint);margin-bottom:16px;opacity:0.5;
+    }
+    .limit-msg{
+      font-size:17px;font-weight:600;color:var(--text);line-height:1.5;
+      margin-bottom:24px;
+    }
+    .limit-btn{
+      display:inline-block;
+      background:linear-gradient(135deg,var(--blue),#0070e0);color:#fff;
+      border:none;border-radius:8px;padding:14px 32px;
+      font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;
+      letter-spacing:0.1em;text-transform:uppercase;
+      text-decoration:none;cursor:pointer;
+      box-shadow:0 4px 24px rgba(26,140,255,0.4);transition:all .2s;
+    }
+    .limit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(26,140,255,0.5);}
+    .limit-sub{
+      margin-top:16px;font-size:12px;color:var(--faint);
+      letter-spacing:0.08em;text-transform:uppercase;
+    }
+
     @media(max-width:768px){
       .navbar{padding:0 20px;}
       .nav-links{display:none;}
@@ -399,6 +428,13 @@
         </div>
         <div class="result-meta" id="resultMeta" style="margin-top:16px;font-size:11px;color:var(--faint);letter-spacing:0.05em;"></div>
       </div>
+
+      <div class="limit-card" id="limitCard" style="display:none;">
+        <div class="limit-icon">&#9711;</div>
+        <div class="limit-msg">Demo limit reached for now. Please try again later.</div>
+        <a class="limit-btn" href="index.html#access">Request Access</a>
+        <div class="limit-sub">Limited public demo access</div>
+      </div>
     </div>
   </div>
 </section>
@@ -551,11 +587,14 @@ async function runScenario() {
   var loading = document.getElementById('resultLoading');
   var card = document.getElementById('resultCard');
 
-  /* Show loading, hide previous result */
+  var limitCard = document.getElementById('limitCard');
+
+  /* Show loading, hide previous results */
   btn.disabled = true;
   btn.textContent = 'EVALUATING...';
   loading.style.display = 'block';
   card.className = 'result-card';
+  limitCard.style.display = 'none';
 
   /* Debug: log submitted input */
   console.log('[CLASPION] Submitting scenario:', input);
@@ -571,10 +610,37 @@ async function runScenario() {
       })
     });
 
+    /* Detect rate limit by HTTP status */
+    if (res.status === 429) {
+      console.log('[CLASPION] Rate limited (429)');
+      limitCard.style.display = 'block';
+      limitCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      loading.style.display = 'none';
+      btn.disabled = false;
+      btn.textContent = 'RUN SCENARIO';
+      return;
+    }
+
     var data = await res.json();
 
     /* Debug: log raw response */
     console.log('[CLASPION] Raw response:', JSON.stringify(data, null, 2));
+
+    /* Detect rate limit by response content */
+    var errMsg = (data.error || '').toLowerCase();
+    var isRateLimit = res.status === 429 ||
+      /too many|rate.?limit|daily.?limit|hourly.?limit|cooldown|cap.?reached|quota/i.test(errMsg) ||
+      (data.ok === false && /limit|too many|throttle/i.test(errMsg));
+
+    if (isRateLimit) {
+      console.log('[CLASPION] Rate limited (response body)');
+      limitCard.style.display = 'block';
+      limitCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      loading.style.display = 'none';
+      btn.disabled = false;
+      btn.textContent = 'RUN SCENARIO';
+      return;
+    }
 
     var result = mapDecision(data);
 
