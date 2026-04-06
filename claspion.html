@@ -627,8 +627,8 @@ async function runScenario() {
     console.log('[CLASPION] Raw response:', JSON.stringify(data, null, 2));
 
     /* Detect rate limit by response content */
-    var errMsg = (data.error || '').toLowerCase();
-    var isRateLimit = res.status === 429 ||
+    var errMsg = (data.error || data.message || '').toLowerCase();
+    var isRateLimit = data.status === 'limit_reached' ||
       /too many|rate.?limit|daily.?limit|hourly.?limit|cooldown|cap.?reached|quota/i.test(errMsg) ||
       (data.ok === false && /limit|too many|throttle/i.test(errMsg));
 
