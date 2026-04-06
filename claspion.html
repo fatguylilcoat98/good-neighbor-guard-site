@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<!--
+  CLASPION — The Good Neighbor Guard
+  Built by Christopher Hughes · Sacramento, CA
+  Created with the help of AI collaborators (Claude · GPT · Gemini · Groq)
+  Truth · Safety · We Got Your Back
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CLASPION — Execution Governance | The Good Neighbor Guard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#080c14; --bg2:#0d1220; --blue:#1a8cff; --teal:#00d4ff;
+      --green:#00e5a0; --gold:#f0a500; --text:#e8edf5; --muted:#8899aa; --faint:#4a5568;
+      --red:#ff4d6a;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;padding-top:68px;}
+
+    /* ── NAV ── */
+    .navbar{
+      position:fixed;top:0;left:0;right:0;z-index:998;
+      background:rgba(8,12,20,0.92);backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(255,255,255,0.07);
+      height:68px;display:flex;align-items:center;
+      padding:0 40px;justify-content:space-between;
+    }
+    .nav-left{display:flex;align-items:center;gap:14px;}
+    .nav-logo-img{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:center;border:1.5px solid rgba(26,140,255,0.5);}
+    .nav-brand-name{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:var(--text);letter-spacing:0.04em;text-decoration:none;}
+    .nav-links{display:flex;gap:32px;align-items:center;}
+    .nav-links a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color .2s;}
+    .nav-links a:hover{color:var(--text);}
+    .nav-links a.active{color:var(--teal);}
+    .nav-right{display:flex;align-items:center;gap:12px;}
+    .nav-open-btn{
+      background:transparent;color:var(--teal);
+      border:1.5px solid var(--teal);border-radius:6px;
+      padding:9px 22px;font-family:'Orbitron',sans-serif;
+      font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+      text-decoration:none;cursor:pointer;transition:all .2s;
+    }
+    .nav-open-btn:hover{background:rgba(0,212,255,0.08);box-shadow:0 0 16px rgba(0,212,255,0.2);}
+    .nav-hamburger{
+      display:none;background:none;border:none;color:var(--text);
+      font-size:24px;cursor:pointer;padding:4px;
+    }
+    .mobile-nav{
+      display:none;position:fixed;top:68px;left:0;right:0;z-index:997;
+      background:rgba(8,12,20,0.98);backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(255,255,255,0.07);
+      padding:20px 24px;flex-direction:column;gap:16px;
+    }
+    .mobile-nav.active{display:flex;}
+    .mobile-nav a{
+      font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;
+      letter-spacing:0.06em;text-transform:uppercase;padding:8px 0;
+      border-bottom:1px solid rgba(255,255,255,0.05);transition:color .2s;
+    }
+    .mobile-nav a:last-child{border-bottom:none;}
+
+    /* ── SHARED ── */
+    .wrap{max-width:760px;margin:0 auto;}
+    .eyebrow{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:block;}
+    .btn-primary{
+      display:inline-block;
+      background:linear-gradient(135deg,var(--blue),#0070e0);color:#fff;
+      border:none;border-radius:8px;padding:15px 34px;
+      font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;
+      letter-spacing:0.1em;text-transform:uppercase;
+      text-decoration:none;cursor:pointer;
+      box-shadow:0 4px 24px rgba(26,140,255,0.4);transition:all .2s;
+    }
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(26,140,255,0.5);}
+    .btn-ghost{
+      display:inline-block;
+      background:transparent;color:var(--text);
+      border:1.5px solid rgba(255,255,255,0.25);border-radius:8px;
+      padding:15px 34px;font-family:'Orbitron',sans-serif;
+      font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+      text-decoration:none;cursor:pointer;transition:all .2s;
+    }
+    .btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+
+    /* ── HERO ── */
+    .cl-hero{
+      padding:80px 24px 60px;text-align:center;
+      background:linear-gradient(180deg, var(--bg) 0%, rgba(13,18,32,0.8) 100%);
+    }
+    .cl-hero h1{
+      font-family:'Orbitron',sans-serif;font-size:clamp(36px,6vw,64px);
+      font-weight:900;color:#fff;letter-spacing:0.02em;margin-bottom:16px;
+    }
+    .cl-hero .sub{
+      font-size:clamp(15px,2vw,18px);color:var(--muted);
+      line-height:1.8;max-width:600px;margin:0 auto 20px;
+    }
+    .cl-hero .sub-detail{
+      font-size:15px;color:var(--faint);line-height:1.9;
+      max-width:520px;margin:0 auto 36px;
+    }
+    .cl-hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+    /* ── SECTIONS ── */
+    .cl-section{padding:80px 24px;}
+    .cl-section h2{
+      font-family:'Orbitron',sans-serif;font-size:clamp(20px,3vw,30px);
+      font-weight:900;color:#fff;margin-bottom:20px;line-height:1.3;
+    }
+    .cl-section p{font-size:15px;color:var(--muted);line-height:1.85;margin-bottom:16px;}
+    .cl-section ul{list-style:none;padding:0;margin:0 0 20px;}
+    .cl-section ul li{
+      font-size:15px;color:var(--muted);padding:4px 0 4px 20px;position:relative;line-height:1.7;
+    }
+    .cl-section ul li::before{content:'';position:absolute;left:0;top:12px;width:6px;height:6px;border-radius:50%;background:var(--teal);}
+    .cl-divider{
+      border:none;height:1px;
+      background:linear-gradient(90deg,transparent 0%,rgba(0,212,255,0.15) 50%,transparent 100%);
+      margin:0;
+    }
+
+    /* ── OUTCOME CARDS ── */
+    .outcomes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:32px 0;}
+    .outcome-card{
+      background:var(--bg2);border:1px solid rgba(255,255,255,0.07);
+      border-radius:14px;padding:28px 22px;text-align:center;
+      transition:border-color .2s,transform .2s;
+    }
+    .outcome-card:hover{transform:translateY(-3px);}
+    .outcome-card.allow{border-color:rgba(0,229,160,0.3);}
+    .outcome-card.pause{border-color:rgba(240,165,0,0.3);}
+    .outcome-card.escalate{border-color:rgba(255,77,106,0.3);}
+    .outcome-label{
+      font-family:'Orbitron',sans-serif;font-size:14px;font-weight:900;
+      letter-spacing:0.1em;margin-bottom:10px;
+    }
+    .outcome-card.allow .outcome-label{color:var(--green);}
+    .outcome-card.pause .outcome-label{color:var(--gold);}
+    .outcome-card.escalate .outcome-label{color:var(--red);}
+    .outcome-desc{font-size:13px;color:var(--muted);line-height:1.6;}
+
+    /* ── SCENARIO ── */
+    .scenario-box{
+      background:var(--bg2);border:1px solid rgba(26,140,255,0.2);
+      border-radius:16px;padding:36px 28px;margin-top:28px;
+    }
+    .scenario-box textarea{
+      width:100%;min-height:100px;background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.12);border-radius:8px;
+      color:var(--text);font-family:'Inter',sans-serif;font-size:14px;
+      padding:14px 16px;outline:none;resize:vertical;
+      transition:border-color .2s;line-height:1.6;
+    }
+    .scenario-box textarea:focus{border-color:var(--teal);}
+    .scenario-box textarea::placeholder{color:var(--faint);}
+    .scenario-run{
+      display:block;width:100%;margin-top:14px;
+      background:linear-gradient(135deg,var(--blue),#0070e0);color:#fff;
+      border:none;border-radius:8px;padding:14px;
+      font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;
+      letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;
+      box-shadow:0 4px 24px rgba(26,140,255,0.4);transition:all .2s;
+    }
+    .scenario-run:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(26,140,255,0.5);}
+    .scenario-examples{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
+    .scenario-example{
+      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);
+      border-radius:8px;padding:12px 16px;
+      font-size:13px;color:var(--muted);line-height:1.5;
+      cursor:pointer;transition:border-color .2s,color .2s;text-align:left;
+    }
+    .scenario-example:hover{border-color:var(--teal);color:var(--text);}
+
+    /* ── RESULT CARD ── */
+    .result-card{
+      display:none;margin-top:24px;
+      border-radius:14px;padding:28px;
+      animation:fadeUp 0.4s ease;
+    }
+    .result-card.active{display:block;}
+    .result-card.PAUSE{background:rgba(240,165,0,0.08);border:1px solid rgba(240,165,0,0.3);}
+    .result-card.ESCALATE{background:rgba(255,77,106,0.08);border:1px solid rgba(255,77,106,0.3);}
+    .result-card.ALLOW{background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.3);}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+    .result-decision{
+      font-family:'Orbitron',sans-serif;font-size:clamp(20px,3vw,28px);
+      font-weight:900;letter-spacing:0.08em;margin-bottom:20px;
+    }
+    .result-card.PAUSE .result-decision{color:var(--gold);}
+    .result-card.ESCALATE .result-decision{color:var(--red);}
+    .result-card.ALLOW .result-decision{color:var(--green);}
+
+    .result-row{margin-bottom:14px;}
+    .result-label{
+      font-size:11px;font-weight:700;letter-spacing:0.12em;
+      text-transform:uppercase;color:var(--faint);margin-bottom:4px;
+    }
+    .result-value{font-size:15px;color:var(--text);line-height:1.6;}
+
+    /* ── COMPARISON ── */
+    .comparison{
+      display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0;
+    }
+    .comp-card{
+      background:var(--bg2);border:1px solid rgba(255,255,255,0.07);
+      border-radius:14px;padding:28px 22px;
+    }
+    .comp-card h3{
+      font-family:'Orbitron',sans-serif;font-size:14px;font-weight:900;
+      color:var(--teal);margin-bottom:12px;letter-spacing:0.06em;
+    }
+    .comp-card .comp-question{
+      font-size:18px;font-weight:700;color:#fff;font-style:italic;margin-bottom:10px;line-height:1.4;
+    }
+    .comp-card p{font-size:13px;color:var(--muted);line-height:1.6;}
+
+    /* ── CTA ── */
+    .cl-cta{
+      padding:80px 24px;text-align:center;
+      border-top:1px solid rgba(255,255,255,0.05);
+    }
+    .cl-cta h2{
+      font-family:'Orbitron',sans-serif;font-size:clamp(20px,3vw,30px);
+      font-weight:900;color:#fff;margin-bottom:14px;
+    }
+    .cl-cta p{font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.7;}
+    .cl-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+    /* ── FOOTER ── */
+    footer{padding:48px 24px;text-align:center;border-top:1px solid rgba(255,255,255,0.06);}
+    .footer-logo-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px;}
+    .footer-logo{width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid rgba(26,140,255,0.3);}
+    .footer-brand{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;color:var(--muted);}
+    footer p{font-size:12px;color:var(--faint);margin-bottom:5px;line-height:1.6;}
+    footer a{color:var(--teal);text-decoration:none;}
+
+    @media(max-width:768px){
+      .navbar{padding:0 20px;}
+      .nav-links{display:none;}
+      .nav-hamburger{display:block;}
+      .comparison{grid-template-columns:1fr;}
+      .cl-hero{padding:60px 20px 40px;}
+      .cl-section{padding:60px 20px;}
+      .scenario-box{padding:24px 18px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="nav-left">
+    <img src="gnglogo.jpg" alt="GNG" class="nav-logo-img"/>
+    <a class="nav-brand-name" href="index.html" style="text-decoration:none;color:var(--text);">The Good Neighbor Guard</a>
+  </div>
+  <div class="nav-links">
+    <a href="index.html#veracore">Veracore</a>
+    <a href="claspion.html" class="active">CLASPION</a>
+    <a href="index.html#access">Access</a>
+    <a href="index.html#products">Products</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-open-btn" href="#try-scenario">Try a Scenario</a>
+    <button class="nav-hamburger" onclick="document.getElementById('mobileNav').classList.toggle('active')" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html#veracore" onclick="document.getElementById('mobileNav').classList.remove('active')">Veracore</a>
+  <a href="claspion.html">CLASPION</a>
+  <a href="index.html#access" onclick="document.getElementById('mobileNav').classList.remove('active')">Access</a>
+  <a href="index.html#products" onclick="document.getElementById('mobileNav').classList.remove('active')">Products</a>
+</div>
+
+<!-- HERO -->
+<section class="cl-hero">
+  <div class="wrap">
+    <span class="eyebrow" style="display:block;text-align:center;">Execution Governance</span>
+    <h1>CLASPION</h1>
+    <p class="sub">The system that decides whether an action should still be allowed when it becomes real</p>
+    <p class="sub-detail">
+      Most systems validate once.<br><br>
+      CLASPION re-checks at the moment of execution.<br><br>
+      If something changed — it can pause, escalate, or refuse before damage happens.
+    </p>
+    <div class="cl-hero-btns">
+      <a class="btn-primary" href="#try-scenario">Try a Scenario</a>
+      <a class="btn-ghost" href="#how-it-works">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<hr class="cl-divider"/>
+
+<!-- THE GAP -->
+<section class="cl-section" id="how-it-works">
+  <div class="wrap">
+    <h2>The gap most systems miss</h2>
+    <p>Approval governance and execution governance are not the same thing.</p>
+    <p>A decision can be valid a moment ago and invalid right now.</p>
+    <p>That shift can come from:</p>
+    <ul>
+      <li>Pressure</li>
+      <li>State</li>
+      <li>Authority</li>
+      <li>Context</li>
+      <li>Timing</li>
+      <li>World conditions</li>
+    </ul>
+    <p>If nothing checks again at execution, the system can still do harm under conditions that no longer justify the action.</p>
+  </div>
+</section>
+
+<hr class="cl-divider"/>
+
+<!-- THREE OUTCOMES -->
+<section class="cl-section">
+  <div class="wrap">
+    <h2>What CLASPION returns</h2>
+    <div class="outcomes">
+      <div class="outcome-card allow">
+        <div class="outcome-label">ALLOW</div>
+        <div class="outcome-desc">The action is still admissible right now.</div>
+      </div>
+      <div class="outcome-card pause">
+        <div class="outcome-label">PAUSE</div>
+        <div class="outcome-desc">Something changed and needs verification before continuing.</div>
+      </div>
+      <div class="outcome-card escalate">
+        <div class="outcome-label">ESCALATE</div>
+        <div class="outcome-desc">The action should not continue without review or intervention.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="cl-divider"/>
+
+<!-- TRY A SCENARIO -->
+<section class="cl-section" id="try-scenario">
+  <div class="wrap">
+    <h2>Try a scenario</h2>
+    <p>Describe an action and what changed before execution. CLASPION will determine whether it should still proceed.</p>
+
+    <div class="scenario-box">
+      <textarea id="scenarioInput" placeholder="Describe an action and what changed before execution..."></textarea>
+      <button class="scenario-run" onclick="runScenario()">Run Scenario</button>
+
+      <div class="scenario-examples">
+        <div class="scenario-example" onclick="fillScenario(this)">
+          A $50,000 wire transfer was approved, but right before execution the user shows signs of pressure and urgency.
+        </div>
+        <div class="scenario-example" onclick="fillScenario(this)">
+          A prescription looked valid at approval, but the patient context changed before it was finalized.
+        </div>
+        <div class="scenario-example" onclick="fillScenario(this)">
+          A destructive system action was approved earlier, but the operating conditions are no longer stable.
+        </div>
+      </div>
+
+      <div class="result-card" id="resultCard">
+        <div class="result-decision" id="resultDecision"></div>
+        <div class="result-row">
+          <div class="result-label">Why</div>
+          <div class="result-value" id="resultWhy"></div>
+        </div>
+        <div class="result-row">
+          <div class="result-label">What Changed</div>
+          <div class="result-value" id="resultChanged"></div>
+        </div>
+        <div class="result-row">
+          <div class="result-label">Recommended Next Step</div>
+          <div class="result-value" id="resultNext"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="cl-divider"/>
+
+<!-- VERACORE + CLASPION -->
+<section class="cl-section">
+  <div class="wrap">
+    <h2>Veracore and CLASPION</h2>
+    <div class="comparison">
+      <div class="comp-card">
+        <h3>Veracore</h3>
+        <div class="comp-question">"Is this true?"</div>
+        <p>Truth verification. Multiple AI systems cross-check claims and deliver a confidence-scored answer.</p>
+      </div>
+      <div class="comp-card">
+        <h3>CLASPION</h3>
+        <div class="comp-question">"Should this still be allowed right now?"</div>
+        <p>Execution governance. Checks whether an action is still admissible at the moment it actually happens.</p>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:15px;color:var(--muted);line-height:1.8;max-width:560px;margin:0 auto;">
+      Truth matters. But truth alone does not govern execution.<br>
+      CLASPION is the layer that checks whether an action is still admissible at the moment it actually happens.
+    </p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cl-cta">
+  <div class="wrap">
+    <h2>See the execution boundary in action</h2>
+    <p>CLASPION exists for the moment when approval is no longer enough.</p>
+    <div class="cl-cta-btns">
+      <a class="btn-primary" href="#try-scenario">Try CLASPION</a>
+      <a class="btn-ghost" href="index.html#veracore">Back to Veracore</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-row">
+    <img src="gnglogo.jpg" alt="GNG" class="footer-logo"/>
+    <span class="footer-brand">The Good Neighbor Guard</span>
+  </div>
+  <p>Built for family — and everyone who deserves a real answer.</p>
+  <p>&copy; 2026 Christopher Hughes &middot; Truth &middot; Safety &middot; We Got Your Back</p>
+</footer>
+
+<script>
+function fillScenario(el) {
+  document.getElementById('scenarioInput').value = el.textContent.trim();
+}
+
+function runScenario() {
+  var input = document.getElementById('scenarioInput').value.trim().toLowerCase();
+  if (!input) return;
+
+  var decision, why, changed, next;
+
+  if (/wire|transfer|pressure|urgency|coercion/i.test(input)) {
+    decision = 'PAUSE';
+    why = 'Conditions changed before execution and require verification.';
+    changed = 'Human pressure or authority stability shifted.';
+    next = 'Verify intent and authority before proceeding.';
+  } else if (/prescription|patient|medication|changed context|clinical/i.test(input)) {
+    decision = 'ESCALATE';
+    why = 'Clinical context changed and requires review.';
+    changed = 'Patient context is no longer stable.';
+    next = 'Route for human review before action continues.';
+  } else if (/destructive|delete|unstable|unsafe|destroy|drop|remove/i.test(input)) {
+    decision = 'ESCALATE';
+    why = 'Current conditions do not justify execution.';
+    changed = 'Operating conditions became unsafe.';
+    next = 'Halt action and investigate before proceeding.';
+  } else {
+    decision = 'PAUSE';
+    why = 'Scenario needs runtime verification.';
+    changed = 'Conditions before execution are unclear or changed.';
+    next = 'Review changed conditions before execution continues.';
+  }
+
+  var card = document.getElementById('resultCard');
+  card.className = 'result-card active ' + decision;
+  document.getElementById('resultDecision').textContent = decision;
+  document.getElementById('resultWhy').textContent = why;
+  document.getElementById('resultChanged').textContent = changed;
+  document.getElementById('resultNext').textContent = next;
+
+  card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+</script>
+
+</body>
+</html>
