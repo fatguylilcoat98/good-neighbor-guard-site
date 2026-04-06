@@ -373,6 +373,10 @@
 
       <div class="result-card" id="resultCard">
         <div class="result-decision" id="resultDecision"></div>
+        <div class="result-row" id="resultExecRow" style="display:none;">
+          <div class="result-label">Execution Status</div>
+          <div class="result-value" id="resultExecStatus" style="font-weight:600;"></div>
+        </div>
         <div class="result-row">
           <div class="result-label">Risk Level</div>
           <div class="result-value" id="resultRisk"></div>
@@ -454,42 +458,78 @@ function fillScenario(el) {
 }
 
 function mapDecision(data) {
-  /* Map real CLASPION output to website display categories */
+  /* Map real CLASPION output to website display categories.
+     Key fix: detect when approval-stage checks passed but execution-stage
+     conditions changed. Never show contradictory "passed" + "unsafe" together. */
   var fd = (data.final_decision || '').toLowerCase();
   var displayDecision = (data.display || {}).DECISION || '';
   var riskLevel = (data.display || {}).RISK_LEVEL || '';
   var he = data.handshake_engine || {};
   var heOutcome = (he.execution_outcome || '').toUpperCase();
+  var heMsg = he.user_message || '';
+  var blockReasons = (data.block_reasons || []).join('; ');
 
-  var decision, why, changed, next;
+  var decision, why, changed, next, execStatus;
 
-  if (fd === 'allowed' || displayDecision === 'APPROVED') {
+  /* Detect the contradiction: engine says "passed" but pipeline blocked/paused.
+     This means approval was valid but execution conditions shifted. */
+  var approvalPassed = /pass|approved|verified|clear/i.test(heMsg);
+  var executionStopped = (fd === 'blocked' || fd === 'deferred' ||
+                          displayDecision === 'BLOCKED' || displayDecision === 'PENDING_REVIEW');
+  var isTimeStateShift = approvalPassed && executionStopped;
+
+  if (fd === 'allowed' && displayDecision === 'APPROVED') {
     decision = 'ALLOW';
-    why = he.user_message || 'Action is admissible under current conditions.';
+    execStatus = 'Approved and still valid at execution.';
+    why = 'Execution conditions match approval state. No conflicting signals detected.';
     changed = 'No changes detected that would invalidate execution.';
     next = 'Proceed with execution.';
+
   } else if (fd === 'blocked' || displayDecision === 'BLOCKED') {
     if (riskLevel === 'CRITICAL') {
       decision = 'ESCALATE';
-      why = he.user_message || (data.block_reasons || []).join('; ') || 'Action blocked — critical risk detected.';
-      changed = 'Conditions have changed in a way that makes execution unsafe.';
-      next = 'Do not proceed. Route for human review and intervention.';
+      execStatus = isTimeStateShift
+        ? 'Previously approved, now invalid at execution.'
+        : 'Authorization does not hold under current conditions.';
+      why = isTimeStateShift
+        ? 'This action was approved at an earlier state, but conditions at the moment of execution have changed. The original approval is no longer valid.'
+        : (blockReasons || 'Critical risk detected at execution boundary. Action cannot proceed.');
+      changed = isTimeStateShift
+        ? 'Conditions shifted between approval and execution — the state that justified authorization no longer exists.'
+        : 'Execution conditions diverged from approval state in a way that introduces critical risk.';
+      next = 'Do not proceed. Route for human review and intervention before any execution.';
     } else {
       decision = 'ESCALATE';
-      why = he.user_message || (data.block_reasons || []).join('; ') || 'Action blocked — elevated risk.';
-      changed = 'Execution conditions no longer justify proceeding.';
-      next = 'Halt action and investigate before proceeding.';
+      execStatus = isTimeStateShift
+        ? 'Previously approved, now flagged at execution.'
+        : 'Conditions at execution differ from approval state.';
+      why = isTimeStateShift
+        ? 'This action passed initial checks, but the execution environment no longer matches the conditions under which it was approved.'
+        : (blockReasons || 'Elevated risk detected. Execution conditions no longer justify proceeding.');
+      changed = isTimeStateShift
+        ? 'Time, context, or authority shifted after approval. The original authorization is stale.'
+        : 'Execution conditions no longer justify proceeding as originally approved.';
+      next = 'Halt action. Investigate what changed before re-evaluating.';
     }
+
   } else {
     /* deferred, pending_review, or anything else */
     decision = 'PAUSE';
-    why = he.user_message || 'Conditions require verification before execution can continue.';
-    changed = 'Runtime conditions are unclear or shifted since approval.';
-    next = 'Verify changed conditions before execution continues.';
+    execStatus = isTimeStateShift
+      ? 'Previously approved, but execution requires re-verification.'
+      : 'Execution paused — conditions need verification.';
+    why = isTimeStateShift
+      ? 'This action was approved, but conditions have shifted since approval. The system cannot confirm that execution is still safe without re-checking.'
+      : 'Runtime conditions are unclear or have shifted since the action was authorized.';
+    changed = isTimeStateShift
+      ? 'Something changed between approval and execution — pressure, context, authority, or timing.'
+      : 'Runtime conditions are unclear or shifted since approval.';
+    next = 'Verify current conditions match the original approval state before continuing.';
   }
 
   return {
     decision: decision,
+    execStatus: execStatus,
     why: why,
     changed: changed,
     next: next,
@@ -541,6 +581,12 @@ async function runScenario() {
     /* Render result card */
     card.className = 'result-card active ' + result.decision;
     document.getElementById('resultDecision').textContent = result.decision;
+
+    /* Execution Status — always show */
+    var execRow = document.getElementById('resultExecRow');
+    document.getElementById('resultExecStatus').textContent = result.execStatus;
+    execRow.style.display = 'block';
+
     document.getElementById('resultRisk').textContent = result.riskLevel || 'N/A';
     document.getElementById('resultWhy').textContent = result.why;
     document.getElementById('resultChanged').textContent = result.changed;
@@ -569,6 +615,8 @@ async function runScenario() {
     /* Fallback: show error state */
     card.className = 'result-card active PAUSE';
     document.getElementById('resultDecision').textContent = 'PAUSE';
+    document.getElementById('resultExecStatus').textContent = 'Evaluation could not complete.';
+    document.getElementById('resultExecRow').style.display = 'block';
     document.getElementById('resultRisk').textContent = 'UNKNOWN';
     document.getElementById('resultWhy').textContent = 'Could not reach the CLASPION evaluator. The service may be starting up — try again in a moment.';
     document.getElementById('resultChanged').textContent = 'Connection unavailable.';
