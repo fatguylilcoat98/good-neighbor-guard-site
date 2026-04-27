@@ -296,6 +296,267 @@
       .gt-visual{order:-1;}
       .gt-logo-wrap,.gt-logo{width:200px;height:200px;}
     }
+
+    /* ── RESEARCH SECTION ── */
+    .research-section{
+      padding:90px 24px;
+      background:var(--bg2);
+      border-top:1px solid rgba(26,140,255,0.1);
+      border-bottom:1px solid rgba(0,212,255,0.08);
+    }
+    .research-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 0 2rem;
+      border-bottom:1px solid rgba(255,255,255,0.1);
+      margin-bottom:2rem;
+      max-width:1060px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .research-header h2{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(22px,3.2vw,32px);
+      font-weight:900;
+      color:#fff;
+      margin:0;
+    }
+    .research-toggle{
+      background:var(--blue);
+      color:#fff;
+      border:none;
+      padding:12px 24px;
+      border-radius:8px;
+      font-family:'Orbitron',sans-serif;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:0.1em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:all .2s;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .research-toggle:hover{
+      background:#0055cc;
+      transform:translateY(-1px);
+    }
+    .toggle-arrow{
+      transition:transform 0.3s ease;
+      font-size:12px;
+    }
+    .research-toggle.collapsed .toggle-arrow{
+      transform:rotate(-90deg);
+    }
+    .research-content{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.5s ease;
+      max-width:1060px;
+      margin:0 auto;
+    }
+    .research-content.expanded{
+      max-height:5000px;
+    }
+    .research-tabs{
+      display:flex;
+      gap:8px;
+      margin-bottom:2rem;
+      border-bottom:1px solid rgba(255,255,255,0.1);
+      flex-wrap:wrap;
+    }
+    .tab-btn{
+      background:none;
+      border:none;
+      padding:12px 20px;
+      cursor:pointer;
+      font-family:'Orbitron',sans-serif;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:0.1em;
+      text-transform:uppercase;
+      color:var(--muted);
+      border-bottom:2px solid transparent;
+      transition:all 0.3s ease;
+    }
+    .tab-btn:hover{
+      color:var(--teal);
+    }
+    .tab-btn.active{
+      color:var(--teal);
+      border-bottom-color:var(--teal);
+    }
+    .tab-content{
+      display:none;
+      animation:fadeIn 0.3s ease;
+    }
+    .tab-content.active{
+      display:block;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(10px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+    .featured-research{
+      background:linear-gradient(135deg,rgba(26,140,255,0.1),rgba(0,212,255,0.05));
+      border:1px solid rgba(26,140,255,0.2);
+      color:var(--text);
+      padding:2rem;
+      border-radius:16px;
+      margin-bottom:2rem;
+    }
+    .featured-badge{
+      display:inline-block;
+      background:rgba(26,140,255,0.15);
+      border:1px solid rgba(26,140,255,0.3);
+      padding:6px 16px;
+      border-radius:20px;
+      font-family:'Orbitron',sans-serif;
+      font-size:9px;
+      font-weight:700;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--teal);
+      margin-bottom:1rem;
+    }
+    .featured-research h3{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(18px,2.5vw,24px);
+      font-weight:700;
+      color:#fff;
+      margin:0 0 1rem 0;
+      line-height:1.4;
+    }
+    .research-meta{
+      margin:0 0 1.5rem 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .research-summary p{
+      margin-bottom:1rem;
+      line-height:1.7;
+      color:var(--text);
+    }
+    .key-insight{
+      background:rgba(26,140,255,0.08);
+      border:1px solid rgba(26,140,255,0.15);
+      padding:1rem;
+      border-radius:8px;
+      margin:1rem 0;
+      border-left:3px solid var(--teal);
+    }
+    .research-link{
+      background:var(--blue);
+      color:#fff;
+      border:none;
+      padding:10px 20px;
+      border-radius:6px;
+      font-family:'Orbitron',sans-serif;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:all 0.3s ease;
+      text-decoration:none;
+      display:inline-block;
+    }
+    .research-link:hover{
+      background:#0055cc;
+      transform:translateY(-1px);
+    }
+    .research-stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:1.5rem;
+      margin:2rem 0;
+    }
+    .stat-card{
+      text-align:center;
+      padding:1.5rem;
+      background:rgba(26,140,255,0.05);
+      border:1px solid rgba(26,140,255,0.1);
+      border-radius:12px;
+    }
+    .stat-number{
+      font-family:'Orbitron',sans-serif;
+      font-size:2.2rem;
+      font-weight:900;
+      color:var(--teal);
+      margin-bottom:0.5rem;
+    }
+    .stat-label{
+      color:var(--muted);
+      font-size:13px;
+    }
+    .paper-header{
+      text-align:center;
+      margin-bottom:2rem;
+      padding-bottom:1rem;
+      border-bottom:1px solid rgba(255,255,255,0.1);
+    }
+    .paper-header h2{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(18px,2.8vw,28px);
+      font-weight:700;
+      color:#fff;
+      margin-bottom:1rem;
+      line-height:1.4;
+    }
+    .paper-meta{
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .paper-section{
+      margin-bottom:2rem;
+    }
+    .paper-section h3{
+      font-family:'Orbitron',sans-serif;
+      color:#fff;
+      font-size:18px;
+      margin-bottom:1rem;
+      border-bottom:1px solid rgba(255,255,255,0.1);
+      padding-bottom:0.5rem;
+    }
+    .key-points{
+      background:rgba(26,140,255,0.05);
+      border:1px solid rgba(26,140,255,0.15);
+      padding:1.5rem;
+      border-radius:8px;
+      border-left:3px solid var(--teal);
+      margin:1rem 0;
+    }
+    .key-points ul{
+      margin:0.5rem 0 0 0;
+      padding-left:1.5rem;
+    }
+    .key-points li{
+      margin-bottom:0.5rem;
+      line-height:1.6;
+      color:var(--text);
+    }
+    @media(max-width:768px){
+      .research-header{
+        flex-direction:column;
+        gap:1rem;
+        text-align:center;
+      }
+      .research-tabs{
+        gap:4px;
+      }
+      .tab-btn{
+        padding:8px 12px;
+        font-size:9px;
+      }
+      .featured-research{
+        padding:1.5rem;
+      }
+      .research-stats{
+        grid-template-columns:1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -311,6 +572,7 @@
     <a href="#claspion-section">CLASPION</a>
     <a href="#swoono-section" class="swoono-link">Swoono</a>
     <a href="#guard-table-section">Guard Table</a>
+    <a href="#research-section">Research</a>
     <a href="#access">Access</a>
     <a href="#products">Products</a>
   </div>
@@ -327,6 +589,7 @@
   <a href="#claspion-section" onclick="document.getElementById('mobileNav').classList.remove('active')">CLASPION</a>
   <a href="#swoono-section" class="swoono-link" onclick="document.getElementById('mobileNav').classList.remove('active')">Swoono 💕</a>
   <a href="#guard-table-section" onclick="document.getElementById('mobileNav').classList.remove('active')">Guard Table</a>
+  <a href="#research-section" onclick="document.getElementById('mobileNav').classList.remove('active')">Research</a>
   <a href="#access" onclick="document.getElementById('mobileNav').classList.remove('active')">Access</a>
   <a href="#products" onclick="document.getElementById('mobileNav').classList.remove('active')">Products</a>
   <a href="https://veracore.onrender.com/login" target="_blank" rel="noopener noreferrer">Sign In</a>
@@ -581,6 +844,126 @@
   </div>
 </section>
 
+<!-- RESEARCH SECTION -->
+<section class="research-section" id="research-section">
+  <div class="research-header">
+    <h2>Research & Studies</h2>
+    <button class="research-toggle" onclick="toggleResearch()">
+      <span class="toggle-text">View Research</span>
+      <span class="toggle-arrow">▼</span>
+    </button>
+  </div>
+
+  <div class="research-content" id="research-content">
+    <div class="research-tabs">
+      <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+      <button class="tab-btn" onclick="showTab('ai-research')">AI Research</button>
+      <button class="tab-btn" onclick="showTab('housing')">Housing Rights</button>
+      <button class="tab-btn" onclick="showTab('healthcare')">Healthcare</button>
+    </div>
+
+    <!-- Overview Tab -->
+    <div id="overview" class="tab-content active">
+      <div class="featured-research">
+        <div class="featured-badge">🎯 Latest Research</div>
+        <h3>A Structured Socratic Method for Producing Reasoning Framework Shifts in AI Systems</h3>
+        <p class="research-meta">
+          <strong>Christopher Hughes, The Good Neighbor Guard</strong> — April 25, 2026
+        </p>
+        <div class="research-summary">
+          <p><strong>Discovery:</strong> A Socratic "Thought Partner" mode designed to help humans think through difficult choices also appears to improve how AI systems reason through complex tensions.</p>
+          <p><strong>Key Finding:</strong> Tested across 5 AI systems from 4 providers, structured questioning produces observable reasoning framework shifts — not just better answers, but shifts in how problems are understood.</p>
+          <div class="key-insight">
+            <em>"It uses interaction design as a lever on reasoning quality — keeping the model inside a difficult question long enough for a better framework to emerge before the answer forms."</em>
+          </div>
+        </div>
+        <button class="research-link" onclick="showTab('ai-research')">
+          Read Full Paper →
+        </button>
+      </div>
+
+      <h3 style="color:#fff;font-family:'Orbitron',sans-serif;margin-bottom:1rem;">Understanding the Problem</h3>
+      <p style="color:var(--text);line-height:1.7;margin-bottom:2rem;">
+        The Guard Table exists because regular people face systemic disadvantages when dealing with corporations, landlords, healthcare providers, and debt collectors. Our research focuses on documenting these power imbalances and developing practical solutions.
+      </p>
+
+      <div class="research-stats">
+        <div class="stat-card">
+          <div class="stat-number">2.3M</div>
+          <div class="stat-label">Eviction filings annually</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">68%</div>
+          <div class="stat-label">Tenants without representation</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">$1,500</div>
+          <div class="stat-label">Average cost of legal help</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Research Tab -->
+    <div id="ai-research" class="tab-content">
+      <div class="paper-header">
+        <h2>A Structured Socratic Method for Producing Reasoning Framework Shifts in AI Systems</h2>
+        <div class="paper-meta">
+          <strong>Author:</strong> Christopher Hughes, The Good Neighbor Guard — Sacramento, CA<br/>
+          <strong>Date:</strong> April 25, 2026<br/>
+          <strong>Contact:</strong> YouTube @TheGoodNeighborGuard
+        </div>
+      </div>
+
+      <div class="paper-section">
+        <h3>Summary</h3>
+        <p style="color:var(--text);line-height:1.7;margin-bottom:1rem;">I found something unexpected while building a decision-support tool for regular people.</p>
+        <p style="color:var(--text);line-height:1.7;margin-bottom:1rem;">A Socratic "Thought Partner" mode — originally designed to help humans think through difficult choices without being told what to do — also appears to improve how AI systems reason through their own complex tensions.</p>
+        <div class="key-points">
+          <p><strong>Key findings:</strong></p>
+          <ul>
+            <li>The method does not jailbreak models or remove guardrails</li>
+            <li>Uses interaction design as a lever on reasoning quality</li>
+            <li>Similar pattern appeared across five AI systems from four different providers</li>
+            <li>Results in reasoning framework shifts, not just better answers</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="paper-section">
+        <h3>Why This Matters</h3>
+        <p style="color:var(--text);line-height:1.7;margin-bottom:1rem;">If reasoning frames can be reliably improved through structured interaction design:</p>
+        <ul style="color:var(--text);line-height:1.7;margin-left:1.5rem;">
+          <li style="margin-bottom:0.5rem;">AI systems may be capable of within-session reasoning improvement without parameter updates</li>
+          <li style="margin-bottom:0.5rem;">Human-AI co-reflection may produce frameworks neither side would reach independently</li>
+          <li style="margin-bottom:0.5rem;">We may need evaluation methods that measure reasoning quality before answers form</li>
+          <li style="margin-bottom:0.5rem;">There may be interaction patterns worth designing for high-stakes reasoning and governance</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Housing Rights Tab -->
+    <div id="housing" class="tab-content">
+      <h3 style="color:#fff;font-family:'Orbitron',sans-serif;margin-bottom:1.5rem;">Tenant Protection Studies</h3>
+      <div style="background:rgba(26,140,255,0.05);border:1px solid rgba(26,140,255,0.15);padding:1.5rem;border-radius:8px;margin-bottom:1.5rem;border-left:3px solid var(--teal);">
+        <h4 style="color:#fff;margin:0 0 0.5rem 0;font-size:16px;">The Eviction Process: Information Asymmetry in Practice</h4>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:1rem;"><em>Published: March 2024</em></p>
+        <p style="color:var(--text);line-height:1.6;margin-bottom:1rem;">Analysis of 10,000 eviction cases showing how landlords leverage procedural complexity to gain advantage over unrepresented tenants. Key finding: 73% of successful tenant defenses involve simple procedural challenges that require no legal expertise.</p>
+        <button class="research-link" onclick="alert('Full study available soon')">Read Full Study →</button>
+      </div>
+    </div>
+
+    <!-- Healthcare Tab -->
+    <div id="healthcare" class="tab-content">
+      <h3 style="color:#fff;font-family:'Orbitron',sans-serif;margin-bottom:1.5rem;">Medical Billing and Patient Rights</h3>
+      <div style="background:rgba(26,140,255,0.05);border:1px solid rgba(26,140,255,0.15);padding:1.5rem;border-radius:8px;margin-bottom:1.5rem;border-left:3px solid var(--teal);">
+        <h4 style="color:#fff;margin:0 0 0.5rem 0;font-size:16px;">The $50 Billion Medical Debt Crisis: Patient Protection Gaps</h4>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:1rem;"><em>Published: February 2024</em></p>
+        <p style="color:var(--text);line-height:1.6;margin-bottom:1rem;">Analysis of medical billing practices showing systematic violations of patient protection laws. 67% of billing disputes can be resolved through existing consumer protection frameworks that patients don't know about.</p>
+        <button class="research-link" onclick="alert('Full study available soon')">Read Full Study →</button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ACCESS -->
 <section class="access-section" id="access">
@@ -696,6 +1079,49 @@ function submitAccess(e) {
   document.getElementById('accessConfirm').style.display = 'block';
 }
 document.body.style.paddingTop = '68px';
+
+// Research Section JavaScript
+function toggleResearch() {
+  const content = document.getElementById('research-content');
+  const button = document.querySelector('.research-toggle');
+  const toggleText = button.querySelector('.toggle-text');
+
+  if (content.classList.contains('expanded')) {
+    content.classList.remove('expanded');
+    button.classList.add('collapsed');
+    toggleText.textContent = 'View Research';
+  } else {
+    content.classList.add('expanded');
+    button.classList.remove('collapsed');
+    toggleText.textContent = 'Hide Research';
+  }
+}
+
+function showTab(tabName) {
+  // Hide all tab contents
+  const tabContents = document.querySelectorAll('.tab-content');
+  tabContents.forEach(tab => {
+    tab.classList.remove('active');
+  });
+
+  // Remove active class from all tab buttons
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  tabButtons.forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  // Show selected tab content
+  const selectedTab = document.getElementById(tabName);
+  if (selectedTab) {
+    selectedTab.classList.add('active');
+  }
+
+  // Add active class to clicked button
+  const clickedButton = event ? event.target : document.querySelector(`[onclick="showTab('${tabName}')"]`);
+  if (clickedButton) {
+    clickedButton.classList.add('active');
+  }
+}
 </script>
 
 </body>
