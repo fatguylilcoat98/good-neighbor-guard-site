@@ -4,16 +4,13 @@
   Built by Christopher Hughes · Sacramento, CA
   Truth · Safety · We Got Your Back
 
-  ── PLACEHOLDERS TO REPLACE ──
-  1. Splendor demo video        → search for "REPLACE: SPLENDOR_DEMO_VIDEO"
-  2. TikTok link                → search for "REPLACE: TIKTOK_URL"
-  3. YouTube link               → search for "REPLACE: YOUTUBE_URL"
-  4. LinkedIn link              → search for "REPLACE: LINKEDIN_URL"
-  5. Email address              → search for "REPLACE: EMAIL_ADDRESS"
-  6. Book-a-call link           → search for "REPLACE: BOOKING_URL"
-  7. Splendor product link      → search for "REPLACE: SPLENDOR_URL"
-  8. Slapstick product link     → search for "REPLACE: SLAPSTICK_URL"
-  9. og:image absolute URL      → search for "REPLACE: OG_IMAGE_URL"
+  ── PLACEHOLDERS STILL TO REPLACE ──
+  1. LinkedIn link              → search for "REPLACE: LINKEDIN_URL"
+  2. Email address              → search for "REPLACE: EMAIL_ADDRESS"
+  3. Book-a-call link           → search for "REPLACE: BOOKING_URL"
+  4. Splendor product link      → search for "REPLACE: SPLENDOR_URL"
+  5. Slapstick product link     → search for "REPLACE: SLAPSTICK_URL"
+  6. og:image absolute URL      → search for "REPLACE: OG_IMAGE_URL"
 -->
 <html lang="en">
 <head>
@@ -114,14 +111,11 @@
     /* ── PROOF / VIDEO ── */
     .video-frame{
       margin:44px auto 0;max-width:780px;aspect-ratio:16/9;
-      background:linear-gradient(135deg,rgba(26,140,255,0.08),rgba(0,212,255,0.04));
-      border:1px dashed rgba(0,212,255,0.35);border-radius:14px;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      text-align:center;padding:24px;color:var(--muted);
+      border:1px solid rgba(0,212,255,0.25);border-radius:14px;
+      overflow:hidden;background:#000;
+      box-shadow:0 0 40px rgba(26,140,255,0.15);
     }
-    .video-frame .play{font-size:42px;margin-bottom:10px;color:var(--teal);}
-    .video-frame .lbl{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;}
-    .video-frame .note{font-size:13px;line-height:1.6;max-width:380px;}
+    .video-frame iframe{width:100%;height:100%;border:0;display:block;}
     .proof-line{margin-top:24px;font-size:14px;color:var(--text);text-align:center;}
     .proof-line strong{color:var(--teal);}
 
@@ -266,15 +260,14 @@
     <h2 class="h2">Watch the proof</h2>
     <p class="lead">Most AI forgets when the session resets. Splendor remembers.</p>
 
-    <!-- REPLACE: SPLENDOR_DEMO_VIDEO
-         Swap this whole .video-frame block for an <iframe> or <video> tag.
-         Example: <video controls poster="thumb.jpg" src="splendor-demo.mp4"></video>
-         Or:      <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
-    -->
-    <div class="video-frame" role="img" aria-label="Splendor demo video placeholder">
-      <div class="play">▶</div>
-      <div class="lbl">Add Splendor reset + recall demo video here</div>
-      <div class="note">Drop the video file or YouTube embed in this block.</div>
+    <div class="video-frame">
+      <iframe
+        src="https://www.youtube.com/embed/I_h1H4q9FQg"
+        title="Splendor memory demo"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
 
     <p class="proof-line"><strong>Full refresh. Same memory. No repeating yourself.</strong></p>
@@ -417,16 +410,14 @@
     <p class="lead">Message me on whichever platform you live on. I'll get back to you.</p>
 
     <div class="contact-grid" style="text-align:left;">
-      <!-- REPLACE: TIKTOK_URL — paste your TikTok profile URL into href -->
-      <a class="contact-link" href="https://www.tiktok.com/@thegoodneighborguard" target="_blank" rel="noopener noreferrer">
+      <a class="contact-link" href="https://www.tiktok.com/@stangman98" target="_blank" rel="noopener noreferrer">
         <span class="contact-icon">TT</span>
         <span>
           <span class="contact-name">TikTok</span><br/>
-          <span class="contact-handle">@thegoodneighborguard</span>
+          <span class="contact-handle">@stangman98</span>
         </span>
       </a>
 
-      <!-- REPLACE: YOUTUBE_URL — paste your YouTube channel URL into href -->
       <a class="contact-link" href="https://www.youtube.com/@TheGoodNeighborGuard" target="_blank" rel="noopener noreferrer">
         <span class="contact-icon">YT</span>
         <span>
