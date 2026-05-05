@@ -56,6 +56,7 @@
     .nav-left{display:flex;align-items:center;gap:12px;}
     .nav-logo{width:36px;height:36px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(26,140,255,0.5);}
     .nav-brand{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:var(--text);letter-spacing:0.04em;}
+    .nav-right{display:flex;align-items:center;gap:10px;}
     .nav-cta{
       background:transparent;color:var(--teal);
       border:1.5px solid var(--teal);border-radius:6px;
@@ -64,6 +65,45 @@
       text-decoration:none;cursor:pointer;transition:all .2s;
     }
     .nav-cta:hover{background:rgba(0,212,255,0.08);box-shadow:0 0 16px rgba(0,212,255,0.25);}
+
+    /* ── APPS DROPDOWN ── */
+    .nav-apps{position:relative;}
+    .nav-apps-btn{
+      background:transparent;color:var(--muted);
+      border:1.5px solid rgba(255,255,255,0.18);border-radius:6px;
+      padding:8px 14px;font-family:'Orbitron',sans-serif;
+      font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+      cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;
+    }
+    .nav-apps-btn:hover,.nav-apps-btn[aria-expanded="true"]{border-color:var(--teal);color:var(--teal);}
+    .nav-apps-caret{font-size:9px;transition:transform .2s;}
+    .nav-apps-btn[aria-expanded="true"] .nav-apps-caret{transform:rotate(180deg);}
+    .nav-apps-panel{
+      position:absolute;top:calc(100% + 8px);right:0;
+      min-width:248px;background:rgba(13,18,32,0.98);
+      backdrop-filter:blur(18px);
+      border:1px solid rgba(0,212,255,0.22);border-radius:10px;
+      padding:6px;display:none;flex-direction:column;
+      box-shadow:0 12px 40px rgba(0,0,0,0.5),0 0 24px rgba(26,140,255,0.15);
+      z-index:999;
+    }
+    .nav-apps-panel.open{display:flex;}
+    .nav-apps-panel a{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:10px 12px;border-radius:6px;text-decoration:none;
+      font-size:13px;color:var(--text);font-weight:500;
+      transition:background .15s,color .15s;
+    }
+    .nav-apps-panel a:hover{background:rgba(0,212,255,0.07);color:var(--teal);}
+    .nav-apps-tag{
+      font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;
+      letter-spacing:0.12em;text-transform:uppercase;padding:3px 7px;border-radius:4px;flex-shrink:0;
+    }
+    .tag-live{color:var(--green);background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.28);}
+    .tag-soon{color:var(--muted);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);}
+    @media(max-width:640px){
+      .nav-apps-panel{right:-4px;min-width:220px;}
+    }
 
     /* ── BUTTONS ── */
     .btn{
@@ -222,7 +262,32 @@
     <img src="gnglogo.jpg" alt="The Good Neighbor Guard" class="nav-logo"/>
     <span class="nav-brand">The Good Neighbor Guard</span>
   </div>
-  <a class="nav-cta" href="#contact">Contact</a>
+  <div class="nav-right">
+    <div class="nav-apps">
+      <button class="nav-apps-btn" id="navAppsBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="navAppsPanel">
+        Apps <span class="nav-apps-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-apps-panel" id="navAppsPanel" role="menu" aria-labelledby="navAppsBtn">
+        <a href="https://github.com/fatguylilcoat98/The-Guard-Table" target="_blank" rel="noopener noreferrer" role="menuitem">
+          <span>The Guard Table</span>
+          <span class="nav-apps-tag tag-live">Live</span>
+        </a>
+        <a href="https://github.com/fatguylilcoat98/lylo-mechanic" target="_blank" rel="noopener noreferrer" role="menuitem">
+          <span>Lylo Mechanic</span>
+          <span class="nav-apps-tag tag-soon">Soon</span>
+        </a>
+        <a href="https://github.com/fatguylilcoat98/Swoono" target="_blank" rel="noopener noreferrer" role="menuitem">
+          <span>Swoono</span>
+          <span class="nav-apps-tag tag-soon">Soon</span>
+        </a>
+        <a href="https://github.com/fatguylilcoat98/garden-and-grace-public" target="_blank" rel="noopener noreferrer" role="menuitem">
+          <span>Garden &amp; Grace</span>
+          <span class="nav-apps-tag tag-soon">Soon</span>
+        </a>
+      </div>
+    </div>
+    <a class="nav-cta" href="#contact">Contact</a>
+  </div>
 </nav>
 
 <!-- 1. HERO -->
@@ -458,6 +523,31 @@
   <p>Built by Christopher Hughes · Sacramento, CA</p>
   <p>&copy; 2026 Christopher Hughes</p>
 </footer>
+
+<script>
+  (function(){
+    var btn = document.getElementById('navAppsBtn');
+    var panel = document.getElementById('navAppsPanel');
+    if(!btn || !panel) return;
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = panel.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e){
+      if(!panel.contains(e.target) && e.target !== btn){
+        panel.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){
+        panel.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
