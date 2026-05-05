@@ -95,6 +95,13 @@
       transition:background .15s,color .15s;
     }
     .nav-apps-panel a:hover{background:rgba(0,212,255,0.07);color:var(--teal);}
+    .nav-apps-panel .nav-apps-disabled{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:10px 12px;border-radius:6px;
+      font-size:13px;color:var(--faint);font-weight:500;
+      cursor:not-allowed;user-select:none;
+    }
+    .nav-apps-panel .nav-apps-disabled:hover{background:transparent;}
     .nav-apps-tag{
       font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;
       letter-spacing:0.12em;text-transform:uppercase;padding:3px 7px;border-radius:4px;flex-shrink:0;
@@ -276,18 +283,18 @@
           <span>CLASPION</span>
           <span class="nav-apps-tag tag-live">Live</span>
         </a>
-        <a href="https://lylo-mechanic.onrender.com" target="_blank" rel="noopener noreferrer" role="menuitem">
+        <div class="nav-apps-disabled" role="menuitem" aria-disabled="true">
           <span>Lylo Mechanic</span>
           <span class="nav-apps-tag tag-soon">Soon</span>
-        </a>
-        <a href="https://swoono.onrender.com" target="_blank" rel="noopener noreferrer" role="menuitem">
+        </div>
+        <div class="nav-apps-disabled" role="menuitem" aria-disabled="true">
           <span>Swoono</span>
           <span class="nav-apps-tag tag-soon">Soon</span>
-        </a>
-        <a href="https://garden-and-grace-public.onrender.com" target="_blank" rel="noopener noreferrer" role="menuitem">
+        </div>
+        <div class="nav-apps-disabled" role="menuitem" aria-disabled="true">
           <span>Garden &amp; Grace</span>
           <span class="nav-apps-tag tag-soon">Soon</span>
-        </a>
+        </div>
       </div>
     </div>
     <a class="nav-cta" href="#contact">Contact</a>
