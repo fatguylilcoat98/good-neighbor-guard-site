@@ -16,6 +16,15 @@
   <meta name="twitter:card" content="summary_large_image"/>
 
   <link rel="icon" type="image/jpeg" href="gnglogo.jpg"/>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="GNG"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -107,7 +116,7 @@
     <a class="nav-link" href="#projects">Projects</a>
     <a class="nav-link" href="#videos">Videos</a>
     <a class="nav-link" href="#about">About</a>
-    <a class="nav-cta" href="#contact">Contact</a>
+    <a class="nav-cta" href="#get-app">Get the App</a>
   </div>
 </nav>
 
@@ -128,6 +137,33 @@
     <p class="founder-line">
       Built by <strong>Chris Hughes</strong>, a self-taught developer guided by one rule: if it does not genuinely help people, it is not worth building.
     </p>
+  </div>
+</section>
+
+<section class="section" id="get-app">
+  <div class="wrap center">
+    <span class="eyebrow">Get the App</span>
+    <h2 class="h2">Take The Good Neighbor Guard with you.</h2>
+    <p class="lead">Install it straight to your phone or desktop — no app store required — or grab the Android package directly.</p>
+
+    <div class="grid grid-3" style="text-align:left;max-width:760px;margin-left:auto;margin-right:auto;">
+      <div class="card">
+        <div class="card-title">📲 Open the App</div>
+        <p class="card-desc">AUBS runs entirely in your browser — pick a model and it downloads and runs on your device, fully private and offline after first load. Open it, then add it to your home screen.</p>
+        <a class="btn btn-primary btn-sm" href="https://aubs.thegoodneighborguard.com/local/" target="_blank" rel="noopener noreferrer">Open the App</a>
+        <p class="card-desc" style="margin-top:12px;margin-bottom:0;font-size:12px;color:var(--faint);">
+          Best in Chrome or Edge (desktop or Android). On iPhone, open it then tap <strong>Share</strong> → <strong>Add to Home Screen</strong>.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card-title">🤖 Download for Android</div>
+        <p class="card-desc">A downloadable Android app package (APK) is on the way for direct install on your device.</p>
+        <span class="btn btn-ghost btn-sm" role="button" aria-disabled="true" style="opacity:.5;cursor:default;pointer-events:none;">Android — Coming Soon</span>
+        <p class="card-desc" style="margin-top:12px;margin-bottom:0;font-size:12px;color:var(--faint);">
+          In the meantime, “Open the App” runs the full experience right in your browser.
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -287,6 +323,45 @@
   <p>Built by Chris Hughes · Sacramento, CA</p>
   <p>&copy; 2026 Chris Hughes</p>
 </footer>
+
+<script>
+  // Register the service worker (enables offline + installability).
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('service-worker.js').catch(function (e) {
+        console.warn('SW registration failed:', e);
+      });
+    });
+  }
+
+  // PWA install flow: capture the prompt and wire it to the Install button.
+  (function () {
+    var deferred = null;
+    var btn = document.getElementById('install-btn');
+    var hint = document.getElementById('install-hint');
+
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      deferred = e;
+      if (btn) btn.textContent = 'Install App';
+      if (hint) hint.style.display = 'none';
+    });
+
+    if (btn) {
+      btn.addEventListener('click', function (e) {
+        if (!deferred) return; // no prompt available → let the iOS hint stand
+        e.preventDefault();
+        deferred.prompt();
+        deferred.userChoice.finally(function () { deferred = null; });
+      });
+    }
+
+    window.addEventListener('appinstalled', function () {
+      if (btn) { btn.textContent = '✓ Installed'; btn.setAttribute('aria-disabled', 'true'); }
+      if (hint) hint.style.display = 'none';
+    });
+  })();
+</script>
 
 </body>
 </html>
