@@ -60,6 +60,14 @@
     .hero-inner{position:relative;z-index:2;max-width:930px;}
     .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.3);border-radius:5px;padding:7px 15px;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:800;color:var(--green);letter-spacing:.14em;text-transform:uppercase;margin-bottom:28px;}
     .hero-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.4s ease-in-out infinite;} @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.3)}}
+    /* ROZTORD live badge — green + glowing when the show is live, red when it's off */
+    .roz-badge{display:inline-flex;align-items:center;gap:7px;border-radius:5px;padding:5px 11px;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:.2s;margin-left:2px;white-space:nowrap;}
+    .roz-dot{width:7px;height:7px;border-radius:50%;flex:none;}
+    .roz-badge.live{background:rgba(0,229,160,.10);border:1px solid rgba(0,229,160,.4);color:var(--green);}
+    .roz-badge.live .roz-dot{background:var(--green);box-shadow:0 0 8px var(--green),0 0 3px var(--green);animation:pulse 1.4s ease-in-out infinite;}
+    .roz-badge.live:hover{background:rgba(0,229,160,.18);box-shadow:0 0 16px rgba(0,229,160,.22);}
+    .roz-badge.off{background:rgba(255,77,77,.08);border:1px solid rgba(255,77,77,.3);color:#ff6b6b;}
+    .roz-badge.off .roz-dot{background:#ff4d4d;box-shadow:0 0 6px rgba(255,77,77,.55);}
     h1{font-family:'Orbitron',sans-serif;font-size:clamp(38px,6vw,72px);font-weight:900;line-height:1.05;color:#fff;letter-spacing:-.02em;margin-bottom:18px;}
     .grad{background:linear-gradient(90deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
     .hero-tag{font-family:'Orbitron',sans-serif;color:var(--teal);font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:24px;}
@@ -111,6 +119,9 @@
   <div class="nav-left">
     <img src="gnglogo.jpg" alt="The Good Neighbor Guard" class="nav-logo"/>
     <span class="nav-brand">The Good Neighbor Guard</span>
+    <a class="roz-badge off" id="rozBadge" href="https://roztord.thegoodneighborguard.com/" target="_blank" rel="noopener noreferrer" title="ROZTORD">
+      <span class="roz-dot"></span> <span id="rozText">ROZTORD</span>
+    </a>
   </div>
   <div class="nav-right">
     <a class="nav-link" href="#projects">Projects</a>
@@ -232,6 +243,11 @@
     <p class="lead">Each project started with a real problem affecting real people.</p>
 
     <div class="grid grid-3" style="text-align:left;">
+      <div class="card">
+        <div class="card-title">🎤 ROZTORD</div>
+        <p class="card-desc">A live AI rap-battle show — real AIs spit verses over real beats while a phone audience votes and a couch of AI personalities reacts. Join the live game from your phone.</p>
+        <a class="btn btn-ghost btn-sm" href="https://roztord.thegoodneighborguard.com/join">Join Live</a>
+      </div>
       <div class="card">
         <div class="card-title">❤️ LYLO</div>
         <p class="card-desc">A family memory and legacy system for stories, recipes, traditions, and life lessons.</p>
@@ -402,6 +418,26 @@
       if (btn) { btn.textContent = '✓ Installed'; btn.setAttribute('aria-disabled', 'true'); }
       if (hint) hint.style.display = 'none';
     });
+  })();
+</script>
+
+<script>
+  /* ROZTORD live badge: poll the show's public status; green+glowing when live, red when off. */
+  (function () {
+    var b = document.getElementById('rozBadge'), t = document.getElementById('rozText');
+    if (!b || !t) return;
+    var LIVE = 'https://roztord.thegoodneighborguard.com/api/room/live';
+    var JOIN = 'https://roztord.thegoodneighborguard.com/join';
+    var HOME = 'https://roztord.thegoodneighborguard.com/';
+    function set(live) {
+      if (live) { b.className = 'roz-badge live'; t.textContent = 'ROZTORD LIVE'; b.href = JOIN; b.title = 'ROZTORD is live — tap to join'; }
+      else { b.className = 'roz-badge off'; t.textContent = 'ROZTORD'; b.href = HOME; b.title = 'ROZTORD — offline right now'; }
+    }
+    function check() {
+      fetch(LIVE, { cache: 'no-store' }).then(function (r) { return r.json(); })
+        .then(function (d) { set(!!(d && d.live)); }).catch(function () { set(false); });
+    }
+    check(); setInterval(check, 15000);
   })();
 </script>
 
