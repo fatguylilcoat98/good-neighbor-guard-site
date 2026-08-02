@@ -429,8 +429,24 @@
     var LIVE = 'https://roztord.thegoodneighborguard.com/api/room/live';
     var JOIN = 'https://roztord.thegoodneighborguard.com/join';
     var HOME = 'https://roztord.thegoodneighborguard.com/';
+    function liveLabel() {
+      var w = window.innerWidth || 1280;
+      if (w >= 900) return 'ROZTORD · GAME LIVE — JOIN NOW';
+      if (w >= 620) return 'GAME LIVE — JOIN NOW';
+      return 'LIVE · JOIN';
+    }
+    var isLive = false;
+    // Re-label on rotate/resize, otherwise a phone turned sideways keeps the
+    // cramped version and a desktop window narrowed keeps the wide one.
+    window.addEventListener('resize', function () {
+      if (isLive) t.textContent = liveLabel();
+    });
     function set(live) {
-      if (live) { b.className = 'roz-badge live'; t.textContent = 'ROZTORD LIVE'; b.href = JOIN; b.title = 'ROZTORD is live — tap to join'; }
+      isLive = !!live;
+      // Live state says what to DO, not just that something is on. The label is
+      // width-aware because the full version is 272px wide and lands on top of
+      // the "Get the app" button on a phone.
+      if (live) { b.className = 'roz-badge live'; t.textContent = liveLabel(); b.href = JOIN; b.title = 'ROZTORD is live — tap to join the audience'; }
       else { b.className = 'roz-badge off'; t.textContent = 'ROZTORD'; b.href = HOME; b.title = 'ROZTORD — offline right now'; }
     }
     function check() {
