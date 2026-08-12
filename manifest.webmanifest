@@ -1,7 +1,7 @@
 {
   "name": "The Good Neighbor Guard",
   "short_name": "GNG",
-  "description": "Practical technology that preserves memories, strengthens relationships, verifies truth, and helps people make better decisions.",
+  "description": "Independent technology by Chris Hughes \u2014 agentic-AI execution governance (CLASPION), evidence-focused AI reasoning (VeraCore), private AI, memory systems, and interactive AI.",
   "id": "/",
   "start_url": "./?source=pwa",
   "scope": "./",
@@ -9,10 +9,29 @@
   "orientation": "any",
   "background_color": "#080c14",
   "theme_color": "#080c14",
-  "categories": ["productivity", "lifestyle", "utilities"],
+  "categories": [
+    "productivity",
+    "utilities",
+    "business"
+  ],
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

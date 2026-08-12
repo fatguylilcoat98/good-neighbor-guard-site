@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VeraCore — Evidence-Focused AI Verification | The Good Neighbor Guard</title>
+  <meta name="description" content="VeraCore is an evidence-focused verification engine that tests whether an answer is supportable rather than merely generating one — deterministic computation, multi-source consensus with enforced source diversity, and adversarial challenge."/>
+  <meta name="theme-color" content="#080c14"/>
+  <link rel="canonical" href="https://thegoodneighborguard.com/veracore.html"/>
+  <meta property="og:title" content="VeraCore — Evidence-Focused AI Verification"/>
+  <meta property="og:description" content="Treats LLMs as unreliable narrators and verifies their claims through deterministic computation, adversarial analysis, and source diversity."/>
+  <meta property="og:url" content="https://thegoodneighborguard.com/veracore.html"/>
+  <meta property="og:image" content="https://thegoodneighborguard.com/gnglogo.jpg"/>
+  <link rel="icon" type="image/jpeg" href="gnglogo.jpg"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/site.css"/>
+  <style>
+    .vc-demo{background:var(--bg2);border:1px solid rgba(0,212,255,.2);border-radius:16px;padding:24px;margin-top:14px;}
+    .vc-picker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+    .vc-pick{background:var(--bg3);border:1px solid var(--line);border-radius:9px;padding:10px 13px;font-size:13px;color:var(--text);cursor:pointer;font-family:'Inter',sans-serif;}
+    .vc-pick:hover{border-color:var(--teal);} .vc-pick.sel{border-color:var(--teal);background:rgba(0,212,255,.06);}
+    .vc-result{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:6px;}
+    .vc-answer{padding:16px 18px;background:var(--bg3);border-bottom:1px solid var(--line);}
+    .vc-answer .q{font-size:12px;color:var(--faint);margin-bottom:6px;}
+    .vc-answer .a{font-size:15px;color:#fff;font-weight:600;line-height:1.5;}
+    .vc-bars{padding:16px 18px;display:grid;gap:12px;}
+    .vc-bar-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;}
+    .vc-bar-label span:first-child{color:var(--muted);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;}
+    .vc-bar-label b{color:var(--text);} .vc-track{height:7px;background:var(--bg);border-radius:4px;overflow:hidden;}
+    .vc-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--teal),var(--green));}
+    .vc-meta{padding:14px 18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.6;}
+    .vc-tier{display:inline-block;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:4px 11px;margin-left:6px;}
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="navbar">
+  <div class="nav-left"><img src="gnglogo.jpg" alt="The Good Neighbor Guard logo" class="nav-logo"/><a class="nav-brand" href="index.html">The Good Neighbor Guard</a></div>
+  <div class="nav-right">
+    <a class="nav-link" href="projects.html">Projects</a><a class="nav-link" href="claspion.html">CLASPION</a><a class="nav-link" href="veracore.html" aria-current="page">VeraCore</a><a class="nav-link" href="partners.html">Partners</a><a class="nav-link" href="about.html">About</a><a class="nav-cta" href="contact.html">Contact</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-scrim" id="navScrim"></div>
+<aside class="nav-drawer" id="navDrawer" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="claspion.html">CLASPION</a><a href="veracore.html" aria-current="page">VeraCore</a><a href="partners.html">Partners</a><a href="about.html">About</a><a href="contact.html">Contact</a></aside>
+
+<main id="main">
+<header class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / VeraCore</div>
+    <h1>VeraCore</h1>
+    <p class="lead">An evidence-focused verification engine that tests whether an answer is <strong style="color:var(--text);">supportable</strong> — rather than simply generating convincing text. It treats language models as unreliable narrators and checks their claims.</p>
+    <div class="hero-btns" style="margin-top:24px;"><a class="btn btn-teal" href="#demo">See Example Results</a><a class="btn btn-ghost" href="contact.html">Discuss VeraCore</a></div>
+  </div>
+</header>
+
+<section class="section-sm"><div class="wrap narrow center">
+  <div style="display:inline-block;background:rgba(255,209,102,.06);border:1px solid rgba(255,209,102,.25);border-radius:20px;padding:7px 16px;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);">Active Development</div>
+  <p class="lead" style="margin-top:16px;">VeraCore is a working research system in active development. The examples below are illustrative of its approach; a public live endpoint is rate-limited and gated because verification uses multiple external models.</p>
+</div></section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">The core idea</span><h2 class="h2">Consensus is not certainty</h2>
+    <p class="lead">Agreement between models increases probability, not truth. VeraCore routes a question through independent verification layers before returning a confidence-scored answer.</p></div>
+    <div class="grid grid-3 mt-44 text-left">
+      <div class="card"><div class="card-title" style="font-size:16px;">1 · Deterministic Anchor</div><p class="card-desc">If a question can be answered by computation — math, dates, unit conversions, physical constants — VeraCore never asks a model. Deterministic answers always override model consensus. Zero hallucination risk.</p></div>
+      <div class="card"><div class="card-title" style="font-size:16px;">2 · Retrieval Consensus</div><p class="card-desc">Multiple models independently research the same question with enforced source diversity — each must cite sources from different epistemic classes (primary, curated, live, structured). Models can't self-police; exclusions are injected at the orchestration level.</p></div>
+      <div class="card"><div class="card-title" style="font-size:16px;">3 · Adversarial Challenge</div><p class="card-desc">A dedicated model's only job is to find reasons the consensus answer is wrong — generating counterarguments, surfacing hidden assumptions, and flagging fabricated sources, wrong dates, or non-existent entities.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CURATED EXAMPLE DEMO ──────────────────────────────── -->
+<section class="section section-alt" id="demo">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Example Results</span><h2 class="h2">How VeraCore reports an answer</h2>
+    <p class="lead">These are <strong style="color:var(--text);">pre-computed illustrative examples</strong> showing the <em>shape</em> of a VeraCore result — answer, confidence, evidence assessment, agreement, adversarial challenge, and risk tier. They demonstrate the format, not a live query.</p></div>
+
+    <div class="vc-demo" style="max-width:820px;margin:28px auto 0;">
+      <div class="vc-picker" id="vcPicker"></div>
+      <div class="vc-result" id="vcResult" aria-live="polite"></div>
+    </div>
+    <p class="form-note center" style="max-width:640px;margin:16px auto 0;">Because verification uses multiple external AI models, live public access is deliberately limited. Interested teams can <a href="contact.html">request a guided walkthrough</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap narrow">
+    <span class="eyebrow">Honest scope</span>
+    <h2 class="h2" style="font-size:24px;">What VeraCore is — and isn't</h2>
+    <p class="lead">VeraCore attempts to test whether an answer is <em>supportable</em>, not simply generate convincing text. It reduces — but does not eliminate — the risk of confident-but-wrong answers, and it is explicit about uncertainty. It is a research system in active development, not a certified fact-checking authority, and its confidence scores are estimates, not guarantees.</p>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-cols">
+    <div class="footer-brandcol"><div class="footer-row"><img src="gnglogo.jpg" alt="GNG" class="footer-logo"/><span class="footer-brand">The Good Neighbor Guard</span></div><div class="footer-tag">Truth • Safety • We Got Your Back</div><p class="footer-mission">Practical technology built around people, trust, and accountability. Independent development by Chris Hughes · Sacramento, CA.</p></div>
+    <div class="footer-col"><h4>Explore</h4><a href="projects.html">Projects</a><a href="claspion.html">CLASPION</a><a href="veracore.html">VeraCore</a><a href="about.html">About</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><h4>Business</h4><a href="partners.html">Technology Partnerships</a><a href="acquisition.html">Acquisition / Licensing</a><a href="press.html">Press</a></div>
+    <div class="footer-col"><h4>Legal</h4><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a><a href="security.html">Security</a><a href="accessibility.html">Accessibility</a><a href="demo-terms.html">Demo Terms</a></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; <span data-year>2026</span> Chris Hughes / The Good Neighbor Guard</span><span>Built by Chris Hughes · Sacramento, CA</span></div>
+</footer>
+<script src="assets/config.js"></script><script src="assets/site.js"></script>
+<script>
+/* VeraCore — curated, pre-computed example results (no external API calls). */
+(function(){
+  var EX=[
+    {label:"Math (deterministic)",q:"What is 17% of 2,480?",a:"421.6",conf:100,tier:["Deterministic","var(--green)"],
+     evidence:"Answered by computation — no model was queried.",agree:"N/A — deterministic",
+     adv:"No adversarial challenge needed; the result is exact.",unc:"None"},
+    {label:"Well-sourced fact",q:"What year did the Apollo 11 mission land on the Moon?",a:"1969",conf:98,tier:["Low risk","var(--teal)"],
+     evidence:"Strong: multiple primary and curated sources across independent epistemic classes agree.",agree:"High — models and sources concur",
+     adv:"Challenge found no credible counterargument; no fabricated sources detected.",unc:"Very low"},
+    {label:"Contested / evolving",q:"What is the single best programming language to learn in 2026?",a:"No single supportable answer — it depends on goals and context.",conf:41,tier:["Elevated","var(--gold)"],
+     evidence:"Weak consensus: sources disagree and reflect opinion, not primary evidence.",agree:"Low — significant disagreement across sources",
+     adv:"Challenge surfaced a hidden assumption in the question (\"best\" is undefined) and multiple valid alternatives.",unc:"High — flagged as opinion, not fact"},
+    {label:"Fabrication caught",q:"Summarize the findings of the 2023 Hensley–Okafor cognition study.",a:"Cannot verify — no such study was found in independent sources.",conf:8,tier:["Blocked","#ff6b6b"],
+     evidence:"No primary or curated source corroborates the named study or authors.",agree:"N/A — claim unsupported",
+     adv:"Adversarial layer flagged a likely fabricated citation and non-existent entities; answer withheld.",unc:"Answer refused rather than invented"}
+  ];
+  var picker=document.getElementById("vcPicker"), out=document.getElementById("vcResult");
+  function esc(s){return String(s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+  function render(x){
+    out.innerHTML=
+      '<div class="vc-answer"><div class="q">'+esc(x.q)+'</div><div class="a">'+esc(x.a)+
+        ' <span class="vc-tier" style="color:'+x.tier[1]+';border:1px solid '+x.tier[1]+';">'+x.tier[0]+'</span></div></div>'+
+      '<div class="vc-bars"><div><div class="vc-bar-label"><span>Confidence</span><b>'+x.conf+'%</b></div>'+
+        '<div class="vc-track"><div class="vc-fill" style="width:'+x.conf+'%"></div></div></div></div>'+
+      '<div class="vc-meta"><b style="color:var(--text)">Evidence:</b> '+esc(x.evidence)+
+        '<br><b style="color:var(--text)">Agreement:</b> '+esc(x.agree)+
+        '<br><b style="color:var(--text)">Adversarial challenge:</b> '+esc(x.adv)+
+        '<br><b style="color:var(--text)">Uncertainty:</b> '+esc(x.unc)+'</div>';
+  }
+  EX.forEach(function(x,i){
+    var b=document.createElement("button");b.className="vc-pick"+(i===0?" sel":"");b.type="button";b.textContent=x.label;
+    b.addEventListener("click",function(){picker.querySelectorAll(".vc-pick").forEach(function(p){p.classList.remove("sel");});b.classList.add("sel");render(x);});
+    picker.appendChild(b);
+  });
+  render(EX[0]);
+})();
+</script>
+</body>
+</html>

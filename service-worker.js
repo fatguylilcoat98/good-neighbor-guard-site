@@ -1,10 +1,18 @@
 /* The Good Neighbor Guard — service worker.
    App-shell caching so the site loads offline and is installable. */
-const CACHE = 'gng-v1';
+const CACHE = 'gng-v2';
 const SHELL = [
   './',
   './index.html',
   './claspion.html',
+  './projects.html',
+  './veracore.html',
+  './partners.html',
+  './about.html',
+  './contact.html',
+  './assets/site.css',
+  './assets/config.js',
+  './assets/site.js',
   './manifest.webmanifest',
   './gnglogo.jpg',
   './handshake.jpg',
