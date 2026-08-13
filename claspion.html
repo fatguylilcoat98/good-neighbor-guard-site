@@ -9,7 +9,7 @@
   <link rel="canonical" href="https://thegoodneighborguard.com/claspion.html"/>
   <meta property="og:type" content="website"/>
   <meta property="og:title" content="CLASPION — Execution Governance for Agentic AI"/>
-  <meta property="og:description" content="A control plane between agent intent and execution. Deterministic ALLOW/BLOCK, fail-closed, cryptographic audit. Late-beta, running in two applications."/>
+  <meta property="og:description" content="A runtime safety gate for agentic AI — between an agent's intent and execution. Deterministic ALLOW/BLOCK, fail-closed, with a tamper-evident audit trail."/>
   <meta property="og:url" content="https://thegoodneighborguard.com/claspion.html"/>
   <meta property="og:image" content="https://thegoodneighborguard.com/gnglogo.jpg"/>
   <meta name="twitter:card" content="summary_large_image"/>
@@ -169,8 +169,8 @@
         <span class="eyebrow">Validation</span>
         <h2 class="h2" style="font-size:26px;">Adversarially tested</h2>
         <ul class="checklist plain mt-24">
-          <li>~500 automated tests, including a dedicated adversarial "Forge" harness with 100+ attack families.</li>
-          <li>~85% measured code coverage (line + branch).</li>
+          <li>Exercised by adversarial and hardening test suites.</li>
+          <li>Cryptographic, tamper-evident audit of every decision.</li>
           <li>A tracked, published known-limitations manifest — the project tells you what isn't done yet.</li>
           <li>Provider-agnostic: works under any agent or model; swap the policy "conscience" without changing the host.</li>
         </ul>
@@ -183,7 +183,7 @@
   <div class="wrap narrow">
     <span class="eyebrow">Integration model</span>
     <h2 class="h2" style="font-size:26px;">A bolt-on, not a rebuild</h2>
-    <p class="lead">CLASPION is a bolt-on control plane. The host agent's reasoning, memory, and personality never enter it — only the action <em>intent</em> is submitted for validation. A consumer governs an action with a single call (in-process or over HTTP) and receives a decision plus a verifiable audit record. It is currently integrated into <strong style="color:var(--text);">two independent applications</strong> as a live reference.</p>
+    <p class="lead">CLASPION is a bolt-on control plane. The host agent's reasoning, memory, and personality never enter it — only the action <em>intent</em> is submitted for validation. A consumer governs an action with a single call (in-process or over HTTP) and receives a decision plus a verifiable audit record.</p>
   </div>
 </section>
 
@@ -192,8 +192,8 @@
   <div class="wrap narrow">
     <div style="background:rgba(255,209,102,.05);border:1px solid rgba(255,209,102,.22);border-radius:16px;padding:30px;">
       <span class="eyebrow eyebrow-gold">Honest maturity</span>
-      <h2 class="h2" style="font-size:24px;">Working late-beta — not a finished enterprise SaaS</h2>
-      <p class="lead" style="color:var(--muted);">CLASPION is real, tested, and running as the governance layer in two applications. It is <strong style="color:var(--text);">late-beta</strong>: fully implemented and honestly documented, with a published list of known limitations and areas still being hardened. It is deliberately <em>not</em> represented as a completed, certified enterprise product. A qualified technical team can request a fuller technical overview and diligence materials.</p>
+      <h2 class="h2" style="font-size:24px;">Honestly scoped — not a finished enterprise product</h2>
+      <p class="lead" style="color:var(--muted);">CLASPION is a real, working system with a published list of known limitations and areas still being hardened. It is deliberately <em>not</em> represented as a completed or certified enterprise product. A qualified technical team can request a fuller technical overview and diligence materials.</p>
     </div>
   </div>
 </section>
