@@ -36,9 +36,10 @@ window.GNG = {
   },
 
   projects: {
-    lylo:    "https://mylylo.pro",
-    aubs:    "https://aubs.thegoodneighborguard.com/",
-    roztord: "https://roztord.thegoodneighborguard.com/"
+    lylo:     "https://mylylo.pro",
+    aubs:     "https://aubs.thegoodneighborguard.com/",
+    roztord:  "https://roztord.thegoodneighborguard.com/",
+    pathback: "https://pathback.thegoodneighborguard.com"
   },
 
   // Resolve an email key to a working mailto, falling back to the primary
