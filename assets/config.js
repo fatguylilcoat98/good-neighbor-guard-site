@@ -16,7 +16,7 @@ window.GNG = {
   domain: "https://thegoodneighborguard.com",
 
   // The address that works TODAY. Used as the universal fallback.
-  contactPrimary: { label: "Email", address: "stangman9898@gmail.com", active: true },
+  contactPrimary: { label: "Email", address: "christopher.hughes@thegoodneighborguard.com", active: true },
 
   // Business-domain inboxes. active:false => placeholder, NOT published yet.
   emails: {
