@@ -37,7 +37,7 @@ window.GNG = {
 
   projects: {
     lylo:    "https://mylylo.pro",
-    aubs:    "https://aubs.thegoodneighborguard.com/local/",
+    aubs:    "https://aubs.thegoodneighborguard.com/",
     roztord: "https://roztord.thegoodneighborguard.com/"
   },
 
